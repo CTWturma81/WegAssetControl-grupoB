@@ -1,26 +1,24 @@
 package model.entity;
 
+import exception.AppException;
+
 public class Setor {
 
     private static int contadorId = 1;
 
-    private int id;
+    private final int id;
     private String nome;
     private String descricao;
 
     public Setor(String nome, String descricao) {
 
-        this.id = contadorId++;
         setNome(nome);
         setDescricao(descricao);
+        this.id = contadorId++;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -32,7 +30,7 @@ public class Setor {
             this.nome = nome;
         }
         else {
-            throw new RuntimeException("ERRO: Nome não pode ser vazio");
+            throw new AppException("ERRO: Nome não pode ser vazio");
         }
     }
 
@@ -45,7 +43,7 @@ public class Setor {
             this.descricao = descricao;
         }
         else{
-            throw new RuntimeException("ERRO: Descrição não pode ser vazia");
+            throw new AppException("ERRO: Descrição não pode ser vazia");
         }
     }
 
