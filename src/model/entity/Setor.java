@@ -4,20 +4,19 @@ import exception.AppException;
 
 public class Setor {
 
-    private static int contadorId = 1;
+    private static Integer contadorId = 1;
 
-    private final int id;
+    private final Integer id;
     private String nome;
     private String descricao;
 
     public Setor(String nome, String descricao) {
-
         setNome(nome);
         setDescricao(descricao);
         this.id = contadorId++;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
