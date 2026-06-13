@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c133eab6-18b2-4b73-83a0-bcbefbb30eab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/enums/NivelAlerta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/enums/PerfilAcesso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/enums/StatusAlerta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/enums/StatusAtivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/enums/StatusManutencao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/entity/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,22 +35,22 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "joaquimpimenta"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;joaquimpimenta&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/CTWturma81/WegAssetControl-grupoB",
-    "accountId": "f0e2452c-be2b-481e-b51b-8e27ac4ac2f4"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/CTWturma81/WegAssetControl-grupoB&quot;,
+    &quot;accountId&quot;: &quot;f0e2452c-be2b-481e-b51b-8e27ac4ac2f4&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="3F3Mua9qODolkWFDjV3JLWH2qJK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,7 +59,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "feature/enums"
+    "git-widget-placeholder": "feature/entidade-usuario",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RecentsManager">
