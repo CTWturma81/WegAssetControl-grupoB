@@ -5,8 +5,8 @@ import exception.AppException;
 
 public class Usuario {
 
-    private final int id;
-    private static int idContador = 1;
+    private final Integer id;
+    private static Integer idContador = 1;
     private String nome;
     private String login;
     private String senha;
@@ -14,7 +14,6 @@ public class Usuario {
     private boolean ativo;
 
     public Usuario(String nome, String login, String senha, PerfilAcesso perfilAcesso, boolean ativo){
-
         setNome(nome);
         setLogin(login);
         setSenha(senha);
@@ -23,7 +22,7 @@ public class Usuario {
         this.id = idContador++;
     }
 
-    public long getId(){
+    public Integer getId(){
         return id;
     }
 
