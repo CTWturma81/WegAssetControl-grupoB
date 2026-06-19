@@ -3,10 +3,9 @@ package service;
 import enums.PerfilAcesso;
 import exception.AppException;
 import model.entity.Usuario;
-import repository.UsuarioRepository;
+import model.repository.UsuarioRepository;
 
 import java.util.Collection;
-import java.util.List;
 
 public class UsuarioService {
 
