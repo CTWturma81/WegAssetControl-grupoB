@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c133eab6-18b2-4b73-83a0-bcbefbb30eab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/entity/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/UsuarioRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feature/enums" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,12 +58,18 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "feature/entidade-usuario",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "feature/repository-usuario",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\joaquim_pimenta\IdeaProjects\WegAssetControl-grupoB\src" />
       <recent name="C:\Users\joaquim_pimenta\IdeaProjects\WegAssetControl-grupoB\src\main" />
     </key>
   </component>
@@ -83,11 +88,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1781299525105</updated>
-      <workItem from="1781299526613" duration="1150000" />
+      <workItem from="1781299526613" duration="9027000" />
+      <workItem from="1781553280910" duration="5000" />
+      <workItem from="1781891438407" duration="2013000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
