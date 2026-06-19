@@ -5,25 +5,27 @@ import exception.AppException;
 
 public class Usuario {
 
-    private final Integer id;
-    private static Integer idContador = 1;
+    private Integer id;
     private String nome;
     private String login;
     private String senha;
     private PerfilAcesso perfilAcesso;
     private boolean ativo;
 
-    public Usuario(String nome, String login, String senha, PerfilAcesso perfilAcesso, boolean ativo){
+    public Usuario(String nome, String login, String senha, PerfilAcesso perfilAcesso){
         setNome(nome);
         setLogin(login);
         setSenha(senha);
         setPerfil(perfilAcesso);
-        this.ativo = ativo;
-        this.id = idContador++;
+        this.ativo = true;
     }
 
     public Integer getId(){
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome(){
