@@ -85,8 +85,17 @@ public class Usuario {
         }else{
             throw new AppException("ERRO: Ativo não pode ser nulo");
         }
+    }
 
-
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", login='" + login + '\'' +
+                ", perfilAcesso=" + perfilAcesso +
+                ", ativo=" + ativo +
+                '}';
     }
 
 
