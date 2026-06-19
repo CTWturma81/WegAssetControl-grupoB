@@ -5,7 +5,6 @@ import exception.AppException;
 import model.entity.Usuario;
 import model.repository.UsuarioRepository;
 
-
 import java.util.Collection;
 
 public class UsuarioService {
