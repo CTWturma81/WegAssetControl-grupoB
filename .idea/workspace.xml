@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0603e13-8b4d-4066-938a-912449b57e9f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/exception/AcessoNegadoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/exception/AppException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/exception/EntidadeNaoEncontradaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/exception/RegraNegocioException.java" afterDir="false" />
+    <list default="true" id="c133eab6-18b2-4b73-83a0-bcbefbb30eab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
