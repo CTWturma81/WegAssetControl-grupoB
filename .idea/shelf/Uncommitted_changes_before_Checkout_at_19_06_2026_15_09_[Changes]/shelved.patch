@@ -1,0 +1,88 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"PropertiesComponent\">{}</component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 38ada7d66ce9cce05b5debf774e1216c321c0c3b)
++++ b/.idea/workspace.xml	(date 1781892551439)
+@@ -1,4 +1,75 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="PropertiesComponent">{}</component>
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="6d8cedd8-6833-4fce-a41c-a931353dbf2d" name="Changes" comment="" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "artQT"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/CTWturma81/WegAssetControl-grupoB",
++    "accountId": "ef9a70b6-6183-4855-9140-9d57c53472e9"
++  }
++}]]></component>
++  <component name="ProjectColorInfo"><![CDATA[{
++  "associatedIndex": 5,
++  "fromUser": false
++}]]></component>
++  <component name="ProjectId" id="3FMkVZE5Eh5YY5DItwan7K71m2f" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ModuleVcsDetector.initialDetectionPerformed": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
++    "codeWithMe.voiceChat.enabledByDefault": "false",
++    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
++    "git-widget-placeholder": "master",
++    "junie.onboarding.icon.badge.shown": "true",
++    "kotlin-language-version-configured": "true",
++    "onboarding.tips.debug.path": "C:/Users/artur_thizon/Documents/WegAssetControl-grupoB/src/main/java/org/example/Main.java",
++    "to.speed.mode.migration.done": "true"
++  }
++}]]></component>
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="6d8cedd8-6833-4fce-a41c-a931353dbf2d" name="Changes" comment="" />
++      <created>1781892355752</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1781892355752</updated>
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
++          <line>13</line>
++          <option name="timeStamp" value="1" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
++  </component>
+ </project>
+\ No newline at end of file
