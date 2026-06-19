@@ -32,4 +32,6 @@ public class SetorRepository {
     public void atualizar(Setor setor) {
         setores.put(setor.getId(), setor);
     }
+
+
 }
