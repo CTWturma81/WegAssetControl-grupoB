@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c133eab6-18b2-4b73-83a0-bcbefbb30eab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/entity/Usuario.java" afterDir="false" />
+    <list default="true" id="c133eab6-18b2-4b73-83a0-bcbefbb30eab" name="Changes" comment="feat(setor): cria classe repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feature/entidade-usuario" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,7 +57,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "feature/entidade-usuario",
+    "git-widget-placeholder": "feature/repository-setor",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
@@ -89,5 +87,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(setor): cria classe repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(setor): cria classe repository" />
   </component>
 </project>
