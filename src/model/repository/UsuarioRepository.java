@@ -1,5 +1,6 @@
 package model.repository;
 
+import exception.AppException;
 import model.entity.Usuario;
 
 import java.util.Collection;
