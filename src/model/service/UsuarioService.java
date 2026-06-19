@@ -1,4 +1,4 @@
-package service;
+package model.service;
 
 import enums.PerfilAcesso;
 import exception.AppException;
