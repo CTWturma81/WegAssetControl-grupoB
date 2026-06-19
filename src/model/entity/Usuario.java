@@ -86,8 +86,6 @@ public class Usuario {
         }else{
             throw new AppException("ERRO: Ativo não pode ser nulo");
         }
-
-
     }
 
 
