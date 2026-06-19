@@ -12,13 +12,10 @@ public class UsuarioRepository {
     private static Integer proximoID = 1;
 
     public Usuario criarUsuario(Usuario usuario){
-        try {
-            usuarioRepository.put(proximoID, usuario);
-            proximoID++;
-            return usuario;
-        } catch (Exception e) {
-            throw new AppException("ERRO: Não foi possível criar o usuário. " + e.getMessage());
-        }
+        usuario.setId(proximoID);
+        usuarioRepository.put(proximoID, usuario);
+        proximoID++;
+        return usuario;
     }
 
     public Collection<Usuario> listarUsuarios(){
@@ -35,7 +32,7 @@ public class UsuarioRepository {
                 return usuario;
             }
         }
-        throw new AppException("ERRO: Usuário com email " + email + " não encontrado.");
+        return null;
     }
 
     public Usuario atualizarUsuario(Integer id, Usuario usuarioAtualizado){
@@ -43,7 +40,7 @@ public class UsuarioRepository {
             usuarioRepository.put(id, usuarioAtualizado);
             return usuarioAtualizado;
         }else{
-            throw new AppException("ERRO: Usuário com ID " + id + " não encontrado.");
+            return null;
         }
     }
 
