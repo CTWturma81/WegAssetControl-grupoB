@@ -118,7 +118,7 @@ public class    AtivoIndustrial {
     @Override
     public String toString() {
         return "AtivoIndustrial{" +
-                "id=" + id +
+                "id=" +  id +
                 ", codigoPatrimonial='" + codigoPatrimonial + '\'' +
                 ", nome='" + nome + '\'' +
                 ", tipo='" + tipo + '\'' +
