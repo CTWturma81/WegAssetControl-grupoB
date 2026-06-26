@@ -9,6 +9,7 @@ public class SetorRepository {
     private int proximoId = 1;
 
     public void salvar(Setor setor) {
+        setor.setId(proximoId);
         setores.put(proximoId++, setor);
     }
 
