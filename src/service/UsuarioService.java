@@ -3,10 +3,10 @@ package service;
 import enums.PerfilAcesso;
 import exception.AppException;
 import model.entity.Usuario;
-import repository.UsuarioRepository;
+import model.repository.UsuarioRepository;
 
 import java.util.Collection;
-import java.util.List;
+
 
 public class UsuarioService {
 
@@ -69,6 +69,16 @@ public class UsuarioService {
         }
 
         usuario.setAtivo(false);
+    }
+
+    public Usuario buscarPorId(Integer id){
+        Usuario usuario = usuarioRepository.buscarPorId(id);
+
+        if(usuario == null){
+            throw new AppException("ERRO: Usuario não encontrado.");
+        }
+
+        return usuario;
     }
 
 }
