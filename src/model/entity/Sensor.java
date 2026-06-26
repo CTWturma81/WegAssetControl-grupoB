@@ -15,12 +15,12 @@ public class Sensor {
     private StatusAtivo statusAtivo;
 
     public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, Double unidadeMedida, StatusAtivo statusAtivo) {
-        this.codigo = codigo;
-        this.tipo = tipo;
-        this.ativoIndustrial = ativoIndustrial;
-        this.valorAtual = valorAtual;
-        this.unidadeMedida = unidadeMedida;
-        this.statusAtivo = statusAtivo;
+        setCodigo(codigo);
+        setTipo(tipo);
+        setAtivoIndustrial(ativoIndustrial);
+        setValorAtual(valorAtual);
+        setUnidadeMedida(unidadeMedida);
+        setStatusAtivo(statusAtivo);
     }
 
     public Integer getId() {
