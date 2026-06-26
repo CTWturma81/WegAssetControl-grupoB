@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class AtivoRepository {
+public class AtivoRepository  {
 
     private HashMap<Integer, AtivoIndustrial> ativoRepository = new HashMap<>();
     private static Integer proximoID = 1;
