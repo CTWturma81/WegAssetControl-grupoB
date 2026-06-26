@@ -4,23 +4,23 @@ import exception.AppException;
 
 public class Setor {
 
-    private static int contadorId = 1;
-
-    private final int id;
+    private Integer id;
     private String nome;
     private String descricao;
     private boolean ativo;
 
     public Setor(String nome, String descricao) {
-
         setNome(nome);
         setDescricao(descricao);
-        this.id = contadorId++;
         this.ativo = true;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
