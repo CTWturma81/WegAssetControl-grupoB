@@ -69,6 +69,7 @@ public class Tecnico {
         return ativo;
     }
 
+
     @Override
     public String toString() {
         return "Tecnico{" +
