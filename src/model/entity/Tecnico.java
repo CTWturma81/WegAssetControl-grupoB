@@ -8,13 +8,13 @@ public class Tecnico {
     private String nome;
     private String matricula;
     private String especialidade;
-    private AtivoIndustrial ativo;
+    private boolean ativo;
 
-    public Tecnico(String nome, String matricula, String especialidade, AtivoIndustrial ativo) {
+    public Tecnico(String nome, String matricula, String especialidade) {
         setNome(nome);
         setMatricula(matricula);
         setEspecialidade(especialidade);
-        setAtivo(ativo);
+        this.ativo = true;
     }
 
     public void setId(Integer id) {
@@ -61,17 +61,14 @@ public class Tecnico {
         return especialidade;
     }
 
-    public void setAtivo(AtivoIndustrial ativo) {
-        if(ativo != null) {
-            this.ativo = ativo;
-        } else {
-            throw new AppException("ERRO: Ativo não pode ser vazio.");
-        }
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
-    public AtivoIndustrial getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
+
 
     @Override
     public String toString() {
