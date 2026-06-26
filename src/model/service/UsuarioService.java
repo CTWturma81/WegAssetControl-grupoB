@@ -7,6 +7,7 @@ import model.repository.UsuarioRepository;
 
 import java.util.Collection;
 
+
 public class UsuarioService {
 
     private UsuarioRepository usuarioRepository;
@@ -68,6 +69,16 @@ public class UsuarioService {
         }
 
         usuario.setAtivo(false);
+    }
+
+    public Usuario buscarPorId(Integer id){
+        Usuario usuario = usuarioRepository.buscarPorId(id);
+
+        if(usuario == null){
+            throw new AppException("ERRO: Usuario não encontrado.");
+        }
+
+        return usuario;
     }
 
 }
