@@ -9,12 +9,14 @@ public class Setor {
     private final int id;
     private String nome;
     private String descricao;
+    private boolean ativo;
 
     public Setor(String nome, String descricao) {
 
         setNome(nome);
         setDescricao(descricao);
         this.id = contadorId++;
+        this.ativo = true;
     }
 
     public int getId() {
@@ -47,10 +49,26 @@ public class Setor {
         }
     }
 
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        if (ativo != null) {
+            this.ativo = ativo;
+        }
+
+        else {
+            throw new AppException("ERRO: Ativo não pode ser vazio");
+        }
+
+    }
+
     public String toString() {
         return "Setor{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", ativo=" + ativo +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
