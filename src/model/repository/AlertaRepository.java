@@ -23,8 +23,8 @@ public class AlertaRepository {
         return alertas.get(id);
     }
 
-    public HashMap<Integer, Alerta> listarTodos() {
-        return alertas;
+    public List<Alerta> listarTodos() {
+        return new ArrayList<>(alertas.values());
     }
 
     public List <Alerta> listarAbertos() {
