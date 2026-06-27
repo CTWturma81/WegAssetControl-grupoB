@@ -5,9 +5,15 @@ import java.util.Scanner;
 public class MenuAdministrador {
 
     private Scanner scanner;
+    GerenciarUsuarios gerenciarUsuarios;
+    GerenciarTecnicos gerenciarTecnicos;
+    GerenciarSetores gerenciarSetores;
 
-    public MenuAdministrador(){
+    public MenuAdministrador(GerenciarUsuarios gerenciarUsuarios,GerenciarTecnicos gerenciarTecnicos,GerenciarSetores gerenciarSetores){
         scanner = new Scanner(System.in);
+        this.gerenciarUsuarios = gerenciarUsuarios;
+        this.gerenciarTecnicos = gerenciarTecnicos;
+        this.gerenciarSetores =  gerenciarSetores;
     }
 
     public void menuAdm(){
@@ -27,7 +33,8 @@ public class MenuAdministrador {
             opcao = scanner.nextInt();
 
             switch (opcao) {
-                case 1-> System.out.println("Gerenciando usuarios");
+                case 1-> gerenciarUsuarios.subMenuUsuario();
+                case 6-> gerenciarTecnicos.subMenuTecnico();
                 case 9-> System.out.println("Saindo");
                 default -> System.out.println("Opção invalida");
             }
