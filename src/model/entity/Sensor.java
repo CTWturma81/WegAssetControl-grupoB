@@ -96,7 +96,10 @@ public class Sensor {
         }else{
             throw new AppException("Erro: status ativo não pode ser nulo");
         }
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
