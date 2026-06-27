@@ -57,5 +57,4 @@ public class TecnicoService {
         }
         return tecnico;
     }
-
 }
