@@ -11,10 +11,10 @@ public class Sensor {
     private String tipo;
     private AtivoIndustrial ativoIndustrial;
     private Double valorAtual;
-    private Double unidadeMedida;
+    private String unidadeMedida;
     private StatusAtivo statusAtivo;
 
-    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, Double unidadeMedida, StatusAtivo statusAtivo) {
+    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, String unidadeMedida, StatusAtivo statusAtivo) {
         setCodigo(codigo);
         setTipo(tipo);
         setAtivoIndustrial(ativoIndustrial);
@@ -74,11 +74,11 @@ public class Sensor {
         }
     }
 
-    public Double getUnidadeMedida() {
+    public String getUnidadeMedida() {
         return unidadeMedida;
     }
 
-    public void setUnidadeMedida(Double unidadeMedida) {
+    public void setUnidadeMedida(String unidadeMedida) {
         if(unidadeMedida != null){
             this.unidadeMedida = unidadeMedida;
         }else{
