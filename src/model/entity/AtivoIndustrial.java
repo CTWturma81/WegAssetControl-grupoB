@@ -2,7 +2,7 @@ package model.entity;
 
 import enums.StatusAtivo;
 
-public class    AtivoIndustrial {
+public class AtivoIndustrial {
 
     private Integer id;
     private String codigoPatrimonial;
