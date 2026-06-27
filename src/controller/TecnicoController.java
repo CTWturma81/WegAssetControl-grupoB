@@ -39,6 +39,7 @@ public class TecnicoController {
             tecnicoService.editarTecnico(id, tecnico);
         }catch (AppException e){
             e.getMessage();
+
         }
     }
 
