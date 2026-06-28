@@ -95,10 +95,6 @@ public class SetorService {
 
         return setor;
     }
-
-
-
-
 }
 
 
