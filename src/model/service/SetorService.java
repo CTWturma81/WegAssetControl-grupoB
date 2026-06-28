@@ -27,6 +27,9 @@ public class SetorService {
         if(setorRepository.buscarPorNome(setor.getNome()) != null){
             throw new AppException("ERRO: Nome do setor já está em uso.");
         }
+        if(setor.getNome().trim().isEmpty()){
+            throw new AppException("ERRO: Nome do setor deve ser preenchido.");
+        }
 
         setorRepository.salvar(setor);
 
