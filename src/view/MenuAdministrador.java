@@ -20,7 +20,7 @@ public class MenuAdministrador {
 
     public void menuAdm(){
         int opcao = 0;
-        while(opcao != 9){
+        while(opcao != 0){
             System.out.println("\n=== MENU ADMINISTRADOR ===");
             System.out.println("1 - Gerenciar Usuários");
             System.out.println("2 - Gerenciar Setores");
@@ -30,12 +30,13 @@ public class MenuAdministrador {
             System.out.println("6 - Gerenciar Técnicos");
             System.out.println("7 - Gerenciar Manutenções");
             System.out.println("8 - Relatórios");
-            System.out.println("9 - Logout");
+            System.out.println("0 - Logout");
             System.out.print("Opção: ");
             opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1-> gerenciarUsuarios.subMenuUsuario();
+                case 2-> gerenciarSetores.menuSetor();
                 case 3-> ativoView.menuAtivo();
                 case 6-> gerenciarTecnicos.subMenuTecnico();
                 case 9-> System.out.println("Saindo");

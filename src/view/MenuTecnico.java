@@ -12,7 +12,7 @@ public class MenuTecnico {
 
     public void menuTecnico(){
         int opcao = 0;
-        while(opcao != 9){
+        while(opcao != 0){
             System.out.println("\n=== MENU TÉCNICO ===");
             System.out.println("1 - Consultar Ativos");
             System.out.println("2 - Consultar Sensores");
@@ -24,7 +24,7 @@ public class MenuTecnico {
             scanner.nextLine();
 
             switch (opcao){
-                case 9 -> System.out.println("Saindo...");
+                case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção invalida");
             }
         }
