@@ -8,12 +8,14 @@ public class MenuAdministrador {
     GerenciarUsuarios gerenciarUsuarios;
     GerenciarTecnicos gerenciarTecnicos;
     GerenciarSetores gerenciarSetores;
+    AtivoView ativoView;
 
-    public MenuAdministrador(GerenciarUsuarios gerenciarUsuarios,GerenciarTecnicos gerenciarTecnicos,GerenciarSetores gerenciarSetores){
+    public MenuAdministrador(GerenciarUsuarios gerenciarUsuarios,GerenciarTecnicos gerenciarTecnicos,GerenciarSetores gerenciarSetores, AtivoView ativoView){
         scanner = new Scanner(System.in);
         this.gerenciarUsuarios = gerenciarUsuarios;
         this.gerenciarTecnicos = gerenciarTecnicos;
         this.gerenciarSetores =  gerenciarSetores;
+        this.ativoView = ativoView;
     }
 
     public void menuAdm(){
@@ -34,6 +36,7 @@ public class MenuAdministrador {
 
             switch (opcao) {
                 case 1-> gerenciarUsuarios.subMenuUsuario();
+                case 3-> ativoView.menuAtivo();
                 case 6-> gerenciarTecnicos.subMenuTecnico();
                 case 9-> System.out.println("Saindo");
                 default -> System.out.println("Opção invalida");
