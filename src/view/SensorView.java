@@ -91,7 +91,6 @@ public class SensorView {
             switch (opcao){
                 //falta controller
             }
-
         }
     }
 }
