@@ -1,5 +1,6 @@
 package view;
 
+import controller.SensorController;
 import enums.StatusAtivo;
 import model.entity.AtivoIndustrial;
 import model.entity.Sensor;
@@ -10,9 +11,11 @@ import java.util.Scanner;
 public class SensorView {
 
     private Scanner scanner;
+    SensorController sensorController;
 
-    public SensorView(){
+    public SensorView(SensorController sensorController){
         scanner = new Scanner(System.in);
+        this.sensorController = sensorController;
     }
 
     public Integer lerId(){
@@ -37,11 +40,11 @@ public class SensorView {
         System.out.println("Tipo: (TEMPERATURA, VIBRACAO, CORRENTE): ");
         String tipo = scanner.nextLine();
 
-        System.out.println("Valor atual: ");
+        System.out.println("Digite o valor do sensor: ");
         Double valorAtual = scanner.nextDouble();
 
         scanner.nextLine();
-        System.out.println("Unidade de medida: ");
+        System.out.println("Digite a unidade de medida: ");
         String unidadeMedida = scanner.nextLine();
 
         return new Sensor(codigo,tipo, ativo, valorAtual, unidadeMedida, StatusAtivo.NORMAL);
@@ -84,13 +87,25 @@ public class SensorView {
             System.out.println("5 - Listar Sensores por Ativo");
             System.out.println("6 - Atualizar valor atual do Sensor");
             System.out.println("7 - Inativar sensor");
-            System.out.println("0 - Voltar");
+            System.out.println("0 - Sair");
             System.out.println("Opção: ");
 
             opcao = scanner.nextInt();
             switch (opcao){
-                //falta controller
+                case 1 -> sensorController.cadastrarSensor();
+                case 2 -> sensorController.listarSensor();
+                case 3 -> sensorController.buscarSensorPorId();
+                case 4 -> sensorController.buscarSensorPorCodigo();
+                case 5 -> sensorController.listarSensorPorAtivo();
+                case 6 -> sensorController.atualizarValorAtualSensor();
+                case 7 -> sensorController.inativarSensor();
+                case 0 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção invalida");
             }
         }
+    }
+
+    public void lerStatusSensor(){
+
     }
 }
