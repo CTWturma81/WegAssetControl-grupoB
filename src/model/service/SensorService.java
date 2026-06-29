@@ -2,10 +2,12 @@ package model.service;
 
 import enums.StatusAtivo;
 import exception.AppException;
+import model.entity.AtivoIndustrial;
 import model.entity.Sensor;
 import model.repository.SensorRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SensorService {
 
@@ -38,8 +40,40 @@ public class SensorService {
         sensorRepository.salvar(sensor);
     }
 
-    public void atualizarValorSensor(Sensor sensor){
-        sensorRepository.buscarPorCodigo(sensor).setValorAtual(sensor.getValorAtual());
+    public List<Sensor> listarSensor(){
+        ArrayList<Sensor> sensor = new ArrayList<>(sensorRepository.listarTodos());
+
+        if(sensor.isEmpty()){
+            throw new AppException("Erro: nenhum sensor cadastrado");
+        }
+
+        return sensor;
+    }
+
+    public void buscarSensorPorId(Integer id){
+        if(sensorRepository.buscarPorId(id) == null){
+            throw new AppException("Erro: nenhum sensor foi encontrado");
+        }
+    }
+
+    public void buscarSensorPorCodigo(Sensor sensor){
+        if(sensorRepository.buscarPorCodigo(sensor) == null){
+            throw new AppException("Erro: nenhum sensor foi encontrado");
+        }
+    }
+
+    public List<Sensor> listarSensorPorAtivo(AtivoIndustrial ativoIndustrial){
+        ArrayList<Sensor> sensor = new ArrayList<>(sensorRepository.listarPorAtivo(ativoIndustrial));
+
+        if(sensor.isEmpty()){
+            throw new AppException("Erro: nenhum sensor cadastrado");
+        }
+
+        return sensor;
+    }
+
+    public void atualizarValorSensor(int id,Double valorAtual){
+        sensorRepository.buscarPorId(id).setValorAtual(valorAtual);
     }
 
     public void intivarSensor(Sensor sensor, StatusAtivo statusAtivo){
