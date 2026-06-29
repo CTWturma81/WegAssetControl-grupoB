@@ -31,6 +31,7 @@ public class GerenciarTecnicos {
               case 3 -> tecnicoController.editarTecnico();
               case 4 -> tecnicoController.inativarTecnicos();
               case 0 -> System.out.println("saindo...");
+              default -> System.out.println("Opção invalida");
             }
         }
     }

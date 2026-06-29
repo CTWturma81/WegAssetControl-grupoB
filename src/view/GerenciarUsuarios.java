@@ -32,6 +32,7 @@ public class GerenciarUsuarios {
                 case 4 -> usuarioController.inativarUsuario();
                 case 5 -> usuarioController.buscarUsuario();
                 case 0 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção invalida");
             }
         }
     }

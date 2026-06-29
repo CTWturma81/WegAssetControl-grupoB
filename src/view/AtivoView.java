@@ -29,7 +29,7 @@ public class AtivoView {
             System.out.println("5 - Inativar ativo");
             System.out.println("6 - Listar ativo por status");
             System.out.println("7 - Listar ativo por setor");
-            System.out.println("8 - Sair");
+            System.out.println("0 - Sair");
             opcao = input.nextInt();
 
             switch(opcao){
@@ -40,7 +40,8 @@ public class AtivoView {
                 case 5-> ativoController.inativarAtivoIndustrial();
                 case 6-> ativoController.listarAtivoIndustrialStatus();
                 case 7-> ativoController.listarAtivoIndustrialSetor();
-                case 8->System.out.println("Saindo...");
+                case 0->System.out.println("Saindo...");
+                default -> System.out.println("Opção invalida");
             }
         }
     }
