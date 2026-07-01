@@ -1,25 +1,26 @@
 package controller;
 
+import enums.StatusAtivo;
 import exception.AppException;
 import model.entity.AtivoIndustrial;
 import model.service.AtivoService;
-import view.AtivoView;
+
+import java.sql.SQLOutput;
 
 public class AtivoController {
 
     AtivoService ativoService;
-    AtivoView ativoView;
 
-    public AtivoController(AtivoService ativoService, AtivoView ativoView){
+
+    public AtivoController(AtivoService ativoService){
         this.ativoService = ativoService;
-        this.ativoView = ativoView;
     }
 
-    public void cadastrarAtivoIndustrial(){
+    public void cadastrarAtivoIndustrial(AtivoIndustrial ativoIndustrial){
         try{
-            ativoService.cadastrarAtivo(ativoView.lerDadosAtivo());
+            ativoService.cadastrarAtivo(ativoIndustrial);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -27,47 +28,47 @@ public class AtivoController {
         try{
             ativoService.listarAtivos();
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void buscarAtivoIndustrialPorID(){
+    public void buscarAtivoIndustrialPorID(Integer id){
         try{
-            ativoService.buscarPorId(ativoView.lerId());
+            ativoService.buscarPorId(id);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void editarAtivoIndustrial(){
+    public void editarAtivoIndustrial(Integer id, AtivoIndustrial ativoIndustrial){
         try{
-            ativoService.editarAtivo(ativoView.lerId(), ativoView.lerDadosAtivo());
+            ativoService.editarAtivo(id, ativoIndustrial);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inativarAtivoIndustrial(){
+    public void inativarAtivoIndustrial(Integer id){
         try{
-            ativoService.inativarAtivo(ativoView.lerId());
+            ativoService.inativarAtivo(id);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarAtivoIndustrialStatus(){
+    public void listarAtivoIndustrialStatus(StatusAtivo statusAtivo){
         try{
-            ativoService.listarPorStatus(ativoView.lerStatus());
+            ativoService.listarPorStatus(statusAtivo);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarAtivoIndustrialSetor(){
+    public void listarAtivoIndustrialSetor(Integer idSetor){
         try{
-            ativoService.listarPorSetor(ativoView.lerIdSetor());
+            ativoService.listarPorSetor(idSetor);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }
