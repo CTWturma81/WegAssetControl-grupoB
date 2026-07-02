@@ -20,6 +20,7 @@ public class Usuario {
         this.ativo = true;
     }
 
+
     public Integer getId(){
         return id;
     }
