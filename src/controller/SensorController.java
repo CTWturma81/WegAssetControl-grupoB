@@ -5,6 +5,7 @@ import model.entity.AtivoIndustrial;
 import model.entity.Sensor;
 import model.service.SensorService;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class SensorController {
         }
     }
 
-    public List<Sensor> listarSensor(){
+    public Collection<Sensor> listarSensor(){
         try{
             return sensorService.listarSensor();
         }catch (AppException e){
@@ -33,27 +34,30 @@ public class SensorController {
         }
     }
 
-    public void buscarSensorPorId(Integer id){
+    public Sensor buscarSensorPorId(Integer id){
         try{
-             sensorService.buscarSensorPorId(id);
+             return sensorService.buscarSensorPorId(id);
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void buscarSensorPorCodigo(String codigo){
+    public Sensor buscarSensorPorCodigo(String codigo){
         try{
-            sensorService.buscarSensorPorCodigo(codigo);
+            return sensorService.buscarSensorPorCodigo(codigo);
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void listarSensorPorAtivo(AtivoIndustrial ativoIndustrial){
+    public Collection<Sensor> listarSensorPorAtivo(AtivoIndustrial ativoIndustrial){
         try{
-            sensorService.listarSensorPorAtivo(ativoIndustrial);
+            return sensorService.listarSensorPorAtivo(ativoIndustrial);
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 

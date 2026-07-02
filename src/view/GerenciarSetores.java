@@ -15,7 +15,7 @@ public class GerenciarSetores {
     }
 
     public void menuSetor(){
-        int opcao = 0;
+        int opcao = 1;
 
         while(opcao != 0){
             System.out.println("1 - Cadastrar Setor");
@@ -32,6 +32,7 @@ public class GerenciarSetores {
                 case 3 -> setorController.buscarSetor();
                 case 4 -> setorController.editarSetor();
                 case 5 -> setorController.inativarSetor();
+                case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção invalida");
             }
         }

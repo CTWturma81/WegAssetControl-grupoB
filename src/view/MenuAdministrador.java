@@ -19,7 +19,7 @@ public class MenuAdministrador {
     }
 
     public void menuAdm(){
-        int opcao = 0;
+        int opcao = 1;
         while(opcao != 0){
             System.out.println("\n=== MENU ADMINISTRADOR ===");
             System.out.println("1 - Gerenciar Usuários");
