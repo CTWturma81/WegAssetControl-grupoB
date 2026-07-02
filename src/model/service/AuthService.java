@@ -1,5 +1,7 @@
 package model.service;
 
+import enums.PerfilAcesso;
+import exception.AcessoNegadoException;
 import exception.AppException;
 import model.entity.Usuario;
 import model.repository.UsuarioRepository;
@@ -26,6 +28,16 @@ public class AuthService {
 
         usuarioLogado = usuario;
         return usuarioLogado;
+    }
+
+    public void validarPermissao(PerfilAcesso... perfisPermitidos) {
+        if (usuarioLogado == null) {
+            throw new AcessoNegadoException();
+        }
+        for (PerfilAcesso p : perfisPermitidos) {
+            if (usuarioLogado.getPerfil() == p) return;
+        }
+        throw new AcessoNegadoException();
     }
 
     public Usuario getUsuarioLogado() {
