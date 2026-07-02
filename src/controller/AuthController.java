@@ -7,28 +7,27 @@ import view.LoginView;
 
 public class AuthController {
 
-    private LoginView loginView;
     private AuthService authService;
 
-    public AuthController(LoginView loginView, AuthService authService){
-        this.loginView = loginView;
+    public AuthController(AuthService authService){
         this.authService = authService;
     }
 
-    public Usuario login(){
+    public Usuario login(String login, String senha){
         try{
-            String login = loginView.lerLogin();
-            String senha = loginView.lerSenha();
-
             return authService.login(login, senha);
         } catch (AppException e){
-            loginView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
             return null;
         }
     }
 
     public void logout(){
-        authService.logout();
-        loginView.exibirMensagem("Logout realizado com sucesso!");
+        try{
+            authService.logout();
+        } catch (AppException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }

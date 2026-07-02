@@ -1,23 +1,39 @@
 package view;
 
+import controller.AuthController;
+import model.entity.Usuario;
+
 import java.util.Scanner;
 
 public class LoginView {
 
     private Scanner scanner;
+    private AuthController authController;
 
-    public LoginView(){
+    public LoginView(AuthController authController){
         scanner = new Scanner(System.in);
+        this.authController = authController;
     }
 
-    public String lerLogin(){
+    public Usuario telaLogin(){
         System.out.println("Digite o seu login: ");
-        return scanner.nextLine();
+        String login = scanner.nextLine();
+
+        System.out.println("Digite a sua senha: ");
+        String senha = scanner.nextLine();
+
+        Usuario usuario = authController.login(login, senha);
+
+        if (usuario != null){
+            System.out.println("Login realizado com sucesso!");
+        }
+
+        return usuario;
     }
 
-    public String lerSenha(){
-        System.out.println("Digite a sua senha: ");
-        return scanner.nextLine();
+    public void telaLogout(){
+        authController.logout();
+        System.out.println("Logout realizado com sucesso!");
     }
 
     public void exibirMensagem(String mensagem){

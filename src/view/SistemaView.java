@@ -3,6 +3,8 @@ package view;
 import controller.AuthController;
 import model.entity.Usuario;
 
+import java.util.Scanner;
+
 public class SistemaView {
 
     private AuthController authController;
@@ -10,6 +12,7 @@ public class SistemaView {
     private MenuSupervisor menuSupervisor;
     private MenuTecnico menuTecnico;
     private MenuOperador menuOperador;
+    private Scanner scanner;
 
 
     public SistemaView(AuthController authController, MenuAdministrador menuAdministrador, MenuSupervisor menuSupervisor, MenuTecnico menuTecnico, MenuOperador menuOperador){
@@ -18,12 +21,12 @@ public class SistemaView {
         this.menuSupervisor = menuSupervisor;
         this.menuTecnico = menuTecnico;
         this.menuOperador = menuOperador;
+        scanner = new Scanner(System.in);
     }
 
     public void iniciar(){
         while(true){
-
-            Usuario usuario = authController.login();
+            Usuario usuario = telaLogin();
 
             if(usuario == null){
                 continue;
@@ -35,9 +38,17 @@ public class SistemaView {
                 case TECNICO -> menuTecnico.menuTecnico();
                 case OPERADOR -> menuOperador.menuOperador();
             }
-
-
         }
+    }
+
+    private Usuario telaLogin(){
+        System.out.println("Digite o seu login: ");
+        String nome = scanner.nextLine();
+
+        System.out.println("Digite a sua senha: ");
+        String senha = scanner.nextLine();
+
+        return authController.login(nome, senha);
     }
 
 }
