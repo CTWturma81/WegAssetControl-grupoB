@@ -11,7 +11,7 @@ public class MenuSupervisor {
     }
 
     public void menuSupervisor() {
-        int opcao = 0;
+        int opcao = 1;
         while (opcao != 0) {
             System.out.println("\n=== MENU SUPERVISOR ===");
             System.out.println("1 - Gerenciar Setores");

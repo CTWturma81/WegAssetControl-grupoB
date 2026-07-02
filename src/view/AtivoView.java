@@ -19,7 +19,7 @@ public class AtivoView {
     }
 
     public void menuAtivo(){
-        int opcao = 0;
+        int opcao = 1;
 
         while(opcao != 0){
             System.out.println("1 - Cadastrar ativo");

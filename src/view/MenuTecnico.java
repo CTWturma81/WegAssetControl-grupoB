@@ -11,7 +11,7 @@ public class MenuTecnico {
     }
 
     public void menuTecnico(){
-        int opcao = 0;
+        int opcao = 1;
         while(opcao != 0){
             System.out.println("\n=== MENU TÉCNICO ===");
             System.out.println("1 - Consultar Ativos");
