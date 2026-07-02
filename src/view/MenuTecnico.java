@@ -38,6 +38,7 @@ public class MenuTecnico {
                     System.out.println("Saindo...");
                     return true;
                 }
+
                 case 0 -> {
                     return false;
                 }
