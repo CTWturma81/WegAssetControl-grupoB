@@ -5,9 +5,19 @@ import java.util.Scanner;
 public class MenuAdministrador {
 
     private final Scanner scanner;
+    private GerenciarUsuarios gerenciarUsuarios;
+    private GerenciarSetores gerenciarSetores;
+    private AtivoView ativoView;
+    private SensorView sensorView;
+    private GerenciarTecnicos gerenciarTecnicos;
 
-    public MenuAdministrador(Scanner scanner){
+    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos) {
         this.scanner = scanner;
+        this.gerenciarUsuarios = gerenciarUsuarios;
+        this.gerenciarSetores = gerenciarSetores;
+        this.ativoView = ativoView;
+        this.sensorView = sensorView;
+        this.gerenciarTecnicos = gerenciarTecnicos;
     }
 
     public boolean menuAdm(){
@@ -24,16 +34,15 @@ public class MenuAdministrador {
             System.out.println("9 - Logout");
             System.out.println("0 - Encerrar Sistema");
             System.out.print("Opcao: ");
-
             int opcao = lerOpcao();
 
             switch (opcao) {
-                case 1 -> System.out.println("Gerenciar Usuarios ");
-                case 2 -> System.out.println("Gerenciar Setores ");
-                case 3 -> System.out.println("Gerenciar Ativos ");
-                case 4 -> System.out.println("Gerenciar Sensores");
+                case 1 -> gerenciarUsuarios.subMenuUsuario();
+                case 2 -> gerenciarSetores.menuSetor();
+                case 3 -> ativoView.menuAtivo();
+                case 4 -> sensorView.menuSensor();
                 case 5 -> System.out.println("Gerenciar Alertas ");
-                case 6 -> System.out.println("Gerenciar Tecnicos");
+                case 6 -> gerenciarTecnicos.subMenuTecnico();
                 case 7 -> System.out.println("Gerenciar Manutencoes ");
                 case 8 -> System.out.println("Relatorios");
                 case 9 -> {

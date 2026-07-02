@@ -5,9 +5,13 @@ import java.util.Scanner;
 public class MenuOperador {
 
     private final Scanner scanner;
+    private AtivoView ativoView;
+    private GerenciarSetores gerenciarSetores;
 
-    public MenuOperador(Scanner scanner){
+    public MenuOperador(Scanner scanner, AtivoView ativoView, GerenciarSetores gerenciarSetores) {
         this.scanner = scanner;
+        this.ativoView = ativoView;
+        this.gerenciarSetores = gerenciarSetores;
     }
 
     public boolean menuOperador(){
@@ -16,17 +20,17 @@ public class MenuOperador {
             System.out.println("1 - Consultar Ativos");
             System.out.println("2 - Consultar Setores");
             System.out.println("3 - Consultar Alertas");
-            System.out.println("8 - Logout");
+            System.out.println("4 - Logout");
             System.out.println("0 - Encerrar Sistema");
             System.out.print("Opcao: ");
 
             int opcao = lerOpcao();
 
             switch (opcao) {
-                case 1 -> System.out.println("Consultar Ativos");
-                case 2 -> System.out.println("Consultar Setores");
+                case 1 -> ativoView.menuAtivo();
+                case 2 -> gerenciarSetores.menuSetor();
                 case 3 -> System.out.println("Consultar Alertas");
-                case 8 -> {
+                case 4 -> {
                     System.out.println("Saindo...");
                     return true;
                 }

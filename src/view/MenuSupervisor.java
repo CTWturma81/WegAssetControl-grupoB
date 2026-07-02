@@ -5,8 +5,16 @@ import java.util.Scanner;
 public class MenuSupervisor {
 
     private final Scanner scanner;
+    private GerenciarSetores gerenciarSetores;
+    private AtivoView ativoView;
+    private SensorView sensorView;
+    private GerenciarTecnicos gerenciarTecnicos;
 
-    public MenuSupervisor(Scanner scanner){
+    public MenuSupervisor(Scanner scanner, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos) {
+        this.gerenciarSetores = gerenciarSetores;
+        this.ativoView = ativoView;
+        this.sensorView = sensorView;
+        this.gerenciarTecnicos = gerenciarTecnicos;
         this.scanner = scanner;
     }
 
@@ -27,11 +35,11 @@ public class MenuSupervisor {
             int opcao = lerOpcao();
 
             switch (opcao) {
-                case 1 -> System.out.println("Gerenciar Setores");
-                case 2 -> System.out.println("Gerenciar Ativos");
-                case 3 -> System.out.println("Gerenciar Sensores");
+                case 1 -> gerenciarSetores.menuSetor();
+                case 2 -> ativoView.menuAtivo();
+                case 3 -> sensorView.menuSensor();
                 case 4 -> System.out.println("Gerenciar Alertas");
-                case 5 -> System.out.println("Gerenciar Tecnicos");
+                case 5 -> gerenciarTecnicos.subMenuTecnico();
                 case 6 -> System.out.println("Gerenciar Manutencoes");
                 case 7 -> System.out.println("Relatorios");
                 case 8 -> {

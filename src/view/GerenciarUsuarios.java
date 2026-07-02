@@ -26,6 +26,7 @@ public class GerenciarUsuarios {
             System.out.println("5 - Buscar Usuario");
             System.out.println("0 - Sair");
             opcao = input.nextInt();
+            input.nextLine();
 
             switch (opcao){
                 case 1 -> {
@@ -76,6 +77,9 @@ public class GerenciarUsuarios {
 
     public Integer lerId(){
         System.out.println("Digite o ID: ");
-        return input.nextInt();
+        Integer id = input.nextInt();
+        input.nextLine();
+
+        return id;
     }
 }
