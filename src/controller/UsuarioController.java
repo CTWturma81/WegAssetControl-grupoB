@@ -10,60 +10,48 @@ import java.util.Collection;
 public class UsuarioController {
 
     private UsuarioService usuarioService;
-    private UsuarioView usuarioView;
 
-    public UsuarioController(UsuarioService usuarioService, UsuarioView usuarioView){
+    public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
-        this.usuarioView = usuarioView;
     }
 
-    public void cadastrarUsuario(){
+    public void cadastrarUsuario(Usuario usuario){
         try {
-            Usuario usuario = usuarioView.lerDadosUsuario();
             usuarioService.cadastrarUsuario(usuario);
-            usuarioView.exibirMensagem("Usuario cadastrado com sucesso!");
         } catch (AppException e){
-            usuarioView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
     public void listarUsuarios(){
         try{
-            Collection<Usuario> usuarios = usuarioService.listarUsuarios();
-            usuarioView.exibirUsuarios(usuarios);
+            usuarioService.listarUsuarios();
         } catch (AppException e){
-            usuarioView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
-    public void atualizarUsuario(){
+    public void atualizarUsuario(Integer id, Usuario novoUsuario){
         try{
-            Integer id = usuarioView.lerId();
-            Usuario novoUsuario = usuarioView.lerDadosUsuario();
             usuarioService.atualizarUsuario(id, novoUsuario);
-            usuarioView.exibirMensagem("Usuario atualizado com sucesso!");
         } catch (AppException e){
-            usuarioView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inativarUsuario(){
+    public void inativarUsuario(Integer id){
         try{
-            Integer id = usuarioView.lerId();
             usuarioService.inativarUsuario(id);
-            usuarioView.exibirMensagem("Usuario inativado com sucesso!");
         } catch (AppException e){
-            usuarioView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
-    public void buscarUsuario(){
+    public void buscarUsuario(Integer id){
         try{
-            Integer id = usuarioView.lerId();
-            Usuario usuario = usuarioService.buscarPorId(id);
-            usuarioView.exibirUsuario(usuario);
+            usuarioService.buscarPorId(id);
         }catch (AppException e){
-            usuarioView.exibirMensagem(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 

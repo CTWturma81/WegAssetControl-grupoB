@@ -1,6 +1,8 @@
 package view;
 
 import controller.UsuarioController;
+import enums.PerfilAcesso;
+import model.entity.Usuario;
 
 import java.util.Scanner;
 
@@ -14,7 +16,7 @@ public class GerenciarUsuarios {
     }
 
     public void subMenuUsuario(){
-        int opcao = 0;
+        int opcao = 1;
 
         while(opcao != 0){
             System.out.println("1 - Cadastrar Usuario");
@@ -26,14 +28,54 @@ public class GerenciarUsuarios {
             opcao = input.nextInt();
 
             switch (opcao){
-                case 1 -> usuarioController.cadastrarUsuario();
-                case 2 -> usuarioController.listarUsuarios();
-                case 3 -> usuarioController.atualizarUsuario();
-                case 4 -> usuarioController.inativarUsuario();
-                case 5 -> usuarioController.buscarUsuario();
+                case 1 -> {
+                    Usuario usuario = lerDadosUsuario();
+                    usuarioController.cadastrarUsuario(usuario);
+                }
+
+                case 2 -> {
+                    usuarioController.listarUsuarios();
+                }
+
+                case 3 -> {
+                    Integer idAtualizarUsuario = lerId();
+                    Usuario novoUsuario = lerDadosUsuario();
+                    usuarioController.atualizarUsuario(idAtualizarUsuario, novoUsuario);
+                }
+
+                case 4 -> {
+                    Integer idInativarUsuario = lerId();
+                    usuarioController.inativarUsuario(idInativarUsuario);
+                }
+
+                case 5 -> {
+                    Integer idBuscar = lerId();
+                    usuarioController.buscarUsuario(idBuscar);
+                }
                 case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção invalida");
             }
         }
+    }
+
+    public Usuario lerDadosUsuario(){
+        System.out.println("Nome: ");
+        String nome = input.next();
+
+        System.out.println("Login: ");
+        String login = input.next();
+
+        System.out.println("Senha: ");
+        String senha = input.next();
+
+        System.out.println("Perfil de acesso (ADMINISTRADOR, SUPERVISOR, TECNICO, OPERADOR): ");
+        PerfilAcesso perfil = PerfilAcesso.valueOf(input.next().toUpperCase());
+
+        return new Usuario(nome, login, senha, perfil);
+    }
+
+    public Integer lerId(){
+        System.out.println("Digite o ID: ");
+        return input.nextInt();
     }
 }
