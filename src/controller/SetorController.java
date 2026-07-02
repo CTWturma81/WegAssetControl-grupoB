@@ -1,56 +1,58 @@
 package controller;
 
 import exception.AppException;
+import model.entity.Setor;
 import model.service.SetorService;
-import view.GerenciarSetores;
+
+import java.util.Collection;
 
 public class SetorController {
 
     SetorService setorService;
-    GerenciarSetores gerenciarSetores;
 
-    public SetorController(GerenciarSetores gerenciarSetores,SetorService setorService) {
-        this.gerenciarSetores = gerenciarSetores;
+    public SetorController(SetorService setorService) {
         this.setorService = setorService;
     }
 
-    public void cadastrarSetor(){
+    public void cadastrarSetor(Setor setor){
         try{
-            setorService.cadastrarSetor(gerenciarSetores.lerDadosSetor());
+            setorService.cadastrarSetor(setor);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarSetor(){
+    public Collection<Setor> listarSetor(){
         try{
-            setorService.listarSetores();
+            return setorService.listarSetores();
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void buscarSetor(){
+    public Setor buscarSetor(Integer id){
         try{
-            setorService.buscarPorId(gerenciarSetores.lerId());
+            return setorService.buscarPorId(id);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void editarSetor(){
+    public void editarSetor(Setor setor){
         try{
-            setorService.editarSetor(gerenciarSetores.lerDadosSetor());
+            setorService.editarSetor(setor);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inativarSetor(){
+    public void inativarSetor(Integer id){
         try{
-            setorService.inativarSetor(gerenciarSetores.lerId());
+            setorService.inativarSetor(id);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }
