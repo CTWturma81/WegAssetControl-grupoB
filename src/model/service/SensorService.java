@@ -56,8 +56,8 @@ public class SensorService {
         }
     }
 
-    public void buscarSensorPorCodigo(Sensor sensor){
-        if(sensorRepository.buscarPorCodigo(sensor) == null){
+    public void buscarSensorPorCodigo(String codigo){
+        if(sensorRepository.buscarPorCodigo(codigo) == null){
             throw new AppException("Erro: nenhum sensor foi encontrado");
         }
     }
@@ -76,8 +76,7 @@ public class SensorService {
         sensorRepository.buscarPorId(id).setValorAtual(valorAtual);
     }
 
-    public void intivarSensor(Sensor sensor, StatusAtivo statusAtivo){
-        String inativo = "INATIVO";
-        sensorRepository.buscarPorCodigo(sensor).setStatusAtivo(statusAtivo.valueOf(inativo));
+    public void inativarSensor(String codigo) {
+        sensorRepository.buscarPorCodigo(codigo).setStatusAtivo(StatusAtivo.valueOf("INATIVO"));
     }
 }
