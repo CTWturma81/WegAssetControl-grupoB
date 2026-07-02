@@ -8,6 +8,8 @@ import model.entity.Tecnico;
 import model.repository.ManutencaoRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 public class ManutencaoService {
 
@@ -73,6 +75,27 @@ public class ManutencaoService {
             throw new AppException("ERRO: Esta manutenção já foi finalizada e não pode ser alterada.");
         }
     }
+
+    public Collection<Manutencao> listarManutencoesAbertas(){
+        Collection<Manutencao> manutencao = manutencaoRepositorio.listarAbertas();
+
+        if(manutencao.isEmpty()){
+            throw new AppException("Erro: Não há nenhuma manutenção aberta");
+        }
+
+        return manutencao;
+    }
+
+    public Collection<Manutencao> listarManutencaoTecnico(Integer id){
+        Collection<Manutencao> tecnico = manutencaoRepositorio.listarPorTecnico(id);
+
+        if(tecnico.isEmpty()){
+            throw new AppException("Erro: Não há nenhuma manutenção para ser listada");
+        }
+
+        return tecnico;
+    }
+
 }
 
 

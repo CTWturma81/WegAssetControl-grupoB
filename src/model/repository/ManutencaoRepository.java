@@ -4,6 +4,7 @@ import enums.StatusManutencao;
 import model.entity.Manutencao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,12 +30,12 @@ public class ManutencaoRepository {
         return manutencaoRepositorio.get(id);
     }
 
-    public List<Manutencao> listarTodos(){
+    public Collection<Manutencao> listarTodos(){
         return new ArrayList<>(manutencaoRepositorio.values());
     }
 
-    public List<Manutencao> listarAbertas(){
-        List<Manutencao> manutencoesAbertas = new ArrayList<>();
+    public Collection<Manutencao> listarAbertas(){
+        Collection<Manutencao> manutencoesAbertas = new ArrayList<>();
 
         for (Manutencao manutencao : manutencaoRepositorio.values()){
             if(manutencao.getStatus() == StatusManutencao.ABERTA){
@@ -44,8 +45,8 @@ public class ManutencaoRepository {
         return manutencoesAbertas;
     }
 
-    public List<Manutencao> listarPorTecnico(Integer tecnicoId){
-        List<Manutencao> manutencoesTecnico = new ArrayList<>();
+    public Collection<Manutencao> listarPorTecnico(Integer tecnicoId){
+        Collection<Manutencao> manutencoesTecnico = new ArrayList<>();
 
         for(Manutencao manutencao : manutencaoRepositorio.values()){
             if(manutencao.getTecnico() != null && manutencao.getTecnico().getId().equals(tecnicoId)){
@@ -56,8 +57,8 @@ public class ManutencaoRepository {
         return manutencoesTecnico;
     }
 
-    public List<Manutencao> listarPorAtivo(Integer ativoId){
-        List<Manutencao> manutencoesAtivo = new ArrayList<>();
+    public Collection<Manutencao> listarPorAtivo(Integer ativoId){
+        Collection<Manutencao> manutencoesAtivo = new ArrayList<>();
 
         for (Manutencao manutencao : manutencaoRepositorio.values()){
             if(manutencao.getAtivoIndustrial() != null && manutencao.getAtivoIndustrial().getId().equals(ativoId)){
