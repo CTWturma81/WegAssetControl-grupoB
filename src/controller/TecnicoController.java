@@ -5,50 +5,48 @@ import model.entity.Tecnico;
 import model.service.TecnicoService;
 import view.GerenciarTecnicos;
 
+import java.util.Collection;
+
 public class TecnicoController {
 
-    TecnicoService tecnicoService;
-    GerenciarTecnicos gerenciarTecnicos;
+    private TecnicoService tecnicoService;
+    private GerenciarTecnicos gerenciarTecnicos;
 
     public TecnicoController(TecnicoService tecnicoService, GerenciarTecnicos gerenciarTecnicos){
         this.tecnicoService = tecnicoService;
         this.gerenciarTecnicos = gerenciarTecnicos;
     }
 
-    public void cadastrarTecnico(){
+    public void cadastrarTecnico(Tecnico tecnico){
         try{
-            Tecnico tecnico = gerenciarTecnicos.lerDadosTecnicos();
             tecnicoService.cadastrarTecnico(tecnico);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarTecnico(){
+    public Collection<Tecnico> listarTecnico(){
         try{
-            tecnicoService.listarTecnicos();
+            return tecnicoService.listarTecnicos();
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void editarTecnico(){
+    public void editarTecnico(Integer id, Tecnico tecnico){
         try {
-            Integer id = gerenciarTecnicos.lerId();
-            Tecnico tecnico = gerenciarTecnicos.lerDadosTecnicos();
             tecnicoService.editarTecnico(id, tecnico);
         }catch (AppException e){
-            e.getMessage();
-
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inativarTecnicos(){
+    public void inativarTecnicos(Integer id){
         try{
-            Integer id = gerenciarTecnicos.lerId();
             tecnicoService.inativarTecnico(id);
         }catch(AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }
