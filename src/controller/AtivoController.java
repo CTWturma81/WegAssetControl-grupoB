@@ -6,6 +6,7 @@ import model.entity.AtivoIndustrial;
 import model.service.AtivoService;
 
 import java.sql.SQLOutput;
+import java.util.Collection;
 
 public class AtivoController {
 
@@ -24,19 +25,21 @@ public class AtivoController {
         }
     }
 
-    public void listarAtivoIndustrial(){
+    public Collection<AtivoIndustrial> listarAtivoIndustrial(){
         try{
-            ativoService.listarAtivos();
+            return ativoService.listarAtivos();
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void buscarAtivoIndustrialPorID(Integer id){
+    public AtivoIndustrial buscarAtivoIndustrialPorID(Integer id){
         try{
-            ativoService.buscarPorId(id);
+            return ativoService.buscarPorId(id);
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
@@ -56,19 +59,21 @@ public class AtivoController {
         }
     }
 
-    public void listarAtivoIndustrialStatus(StatusAtivo statusAtivo){
+    public Collection<AtivoIndustrial> listarAtivoIndustrialStatus(StatusAtivo statusAtivo){
         try{
-            ativoService.listarPorStatus(statusAtivo);
+            return ativoService.listarPorStatus(statusAtivo);
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void listarAtivoIndustrialSetor(Integer idSetor){
+    public Collection<AtivoIndustrial> listarAtivoIndustrialSetor(Integer idSetor){
         try{
-            ativoService.listarPorSetor(idSetor);
+            return ativoService.listarPorSetor(idSetor);
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 }

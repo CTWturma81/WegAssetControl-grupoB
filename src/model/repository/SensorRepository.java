@@ -22,8 +22,15 @@ public class SensorRepository {
         return sensorMap.get(id);
     }
 
-    public Sensor buscarPorCodigo(Sensor sensor){
-        return sensorMap.get(sensor.getCodigo());
+    public Sensor buscarPorCodigo(String codigo) {
+
+        for (Sensor sensorCodigo : sensorMap.values()) {
+
+            if (sensorCodigo.getCodigo() != null && sensorCodigo.getCodigo().equals(codigo)) {
+                return sensorCodigo;
+            }
+        }
+        return null;
     }
 
     public Collection<Sensor> listarTodos(){

@@ -1,74 +1,75 @@
 package controller;
 
 import exception.AppException;
+import model.entity.AtivoIndustrial;
+import model.entity.Sensor;
 import model.service.SensorService;
-import view.AtivoView;
-import view.SensorView;
+
+import java.util.List;
+
 
 public class SensorController {
 
     SensorService sensorService;
-    SensorView sensorView;
-    AtivoView ativoView;
-    public SensorController(SensorService sensorService, SensorView sensorView, AtivoView ativoView){
+
+    public SensorController(SensorService sensorService){
         this.sensorService = sensorService;
-        this.sensorView = sensorView;
-        this.ativoView = ativoView;
     }
 
-    public void cadastrarSensor(){
+    public void cadastrarSensor(Sensor sensor){
         try{
-            sensorService.cadastrarSensor(sensorView.lerDadosSensor(ativoView.lerDadosAtivo()));
+            sensorService.cadastrarSensor(sensor);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarSensor(){
+    public List<Sensor> listarSensor(){
         try{
-            sensorService.listarSensor();
+            return sensorService.listarSensor();
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void buscarSensorPorId(){
+    public void buscarSensorPorId(Integer id){
         try{
-            sensorService.buscarSensorPorId(sensorView.lerId());
+             sensorService.buscarSensorPorId(id);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void buscarSensorPorCodigo(){
+    public void buscarSensorPorCodigo(String codigo){
         try{
-            sensorService.buscarSensorPorCodigo(sensorView.lerDadosSensor(ativoView.lerDadosAtivo()));
+            sensorService.buscarSensorPorCodigo(codigo);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void listarSensorPorAtivo(){
+    public void listarSensorPorAtivo(AtivoIndustrial ativoIndustrial){
         try{
-            sensorService.listarSensorPorAtivo(ativoView.lerDadosAtivo());
+            sensorService.listarSensorPorAtivo(ativoIndustrial);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void atualizarValorAtualSensor(){
+    public void atualizarValorAtualSensor(Integer id, Double valor){
         try{
-            sensorService.atualizarValorSensor(sensorView.lerId(), sensorView.lerValorAtual());
+            sensorService.atualizarValorSensor(id, valor);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inativarSensor(){
+    public void inativarSensor(String codigo){
         try{
-            sensorService.intivarSensor(sensorView.lerDadosSensor(ativoView.lerDadosAtivo()),ativoView.lerStatus());
+            sensorService.inativarSensor(codigo);
         }catch (AppException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }

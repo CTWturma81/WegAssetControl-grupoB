@@ -15,7 +15,7 @@ public class GerenciarTecnicos {
     }
 
     public void subMenuTecnico(){
-        int opcao = 0;
+        int opcao = 1;
 
         while(opcao != 0){
             System.out.println("1 - Cadastrar técnicos");
@@ -24,12 +24,27 @@ public class GerenciarTecnicos {
             System.out.println("4 - Inativar técnicos");
             System.out.println("0 - sair");
             opcao = input.nextInt();
+            input.nextLine();
 
             switch (opcao){
-              case 1 -> tecnicoController.cadastrarTecnico();
+
+              case 1 -> {
+                  Tecnico tecnico = lerDadosTecnicos();
+                  tecnicoController.cadastrarTecnico(tecnico);
+              }
+
               case 2 -> tecnicoController.listarTecnico();
-              case 3 -> tecnicoController.editarTecnico();
-              case 4 -> tecnicoController.inativarTecnicos();
+
+              case 3 -> {
+                  Integer id = lerId();
+                  Tecnico editarTecnico = lerDadosTecnicos();
+                  tecnicoController.editarTecnico(id, editarTecnico);
+              }
+
+              case 4 -> {
+                  Integer id = lerId();
+                  tecnicoController.inativarTecnicos(id);
+              }
               case 0 -> System.out.println("saindo...");
               default -> System.out.println("Opção invalida");
             }
@@ -37,13 +52,13 @@ public class GerenciarTecnicos {
     }
 
     public Tecnico lerDadosTecnicos(){
-        System.out.println();
+        System.out.println("Nome: ");
         String nome = input.nextLine();
 
-        System.out.println();
+        System.out.println("Matricula: ");
         String matricula = input.nextLine();
 
-        System.out.println();
+        System.out.println("Especialidade: ");
         String especialidade = input.nextLine();
 
         return new Tecnico(nome, matricula, especialidade);
@@ -51,6 +66,8 @@ public class GerenciarTecnicos {
 
     public Integer lerId(){
         System.out.println("digite seu id");
-        return input.nextInt();
+        Integer id = input.nextInt();
+        input.nextLine();
+        return id;
     }
 }
