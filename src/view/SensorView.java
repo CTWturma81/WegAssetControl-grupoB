@@ -34,8 +34,9 @@ public class SensorView {
             System.out.println("7 - Inativar sensor");
             System.out.println("0 - Sair");
             System.out.println("Opção: ");
-
             opcao = scanner.nextInt();
+            scanner.nextLine();
+
             switch (opcao){
                 case 1 -> cadastrar();
                 case 2 -> sensorController.listarSensor();
@@ -60,13 +61,14 @@ public class SensorView {
 
         System.out.println("Digite o valor do sensor: ");
         Double valorAtual = scanner.nextDouble();
-
         scanner.nextLine();
+
         System.out.println("Digite a unidade de medida: ");
         String unidadeMedida = scanner.nextLine();
 
         System.out.println("Digite o ID do ativo industrial que desejas cadastrar: ");
         Integer id = scanner.nextInt();
+        scanner.nextLine();
 
         AtivoIndustrial ativoIndustrial = ativoController.buscarAtivoIndustrialPorID(id);
 
@@ -79,6 +81,7 @@ public class SensorView {
     public void buscarId(){
         System.out.println("Digite o ID do sensor: ");
         Integer id = scanner.nextInt();
+        scanner.nextLine();
 
         sensorController.buscarSensorPorId(id);
         System.out.println("Sensor buscado com sucesso");
@@ -95,6 +98,7 @@ public class SensorView {
     public void listarAtivo(){
         System.out.println("Digite o ID do ativo industrial: ");
         Integer id = scanner.nextInt();
+        scanner.nextLine();
 
         AtivoIndustrial ativoIndustrial = ativoController.buscarAtivoIndustrialPorID(id);
         sensorController.listarSensorPorAtivo(ativoIndustrial);
@@ -106,6 +110,7 @@ public class SensorView {
 
         System.out.println("Digite o valor do sensor: ");
         Double valorNovo = scanner.nextDouble();
+        scanner.nextLine();
 
         sensorController.atualizarValorAtualSensor(id, valorNovo);
     }
@@ -121,6 +126,8 @@ public class SensorView {
         scanner.nextLine();
         System.out.println("Digite o ID do ativo: ");
         Integer idAtivo = scanner.nextInt();
+        scanner.nextLine();
+
         return idAtivo;
     }
 

@@ -5,9 +5,13 @@ import java.util.Scanner;
 public class MenuTecnico {
 
     private final Scanner scanner;
+    private AtivoView ativoView;
+    private SensorView sensorView;
 
-    public MenuTecnico(Scanner scanner){
+    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView) {
         this.scanner = scanner;
+        this.ativoView = ativoView;
+        this.sensorView = sensorView;
     }
 
     public boolean menuTecnico(){
@@ -24,8 +28,8 @@ public class MenuTecnico {
             int opcao = lerOpcao();
 
             switch (opcao) {
-                case 1 -> System.out.println("Consultar Ativos - em construcao.");
-                case 2 -> System.out.println("Consultar Sensores - em construcao.");
+                case 1 -> ativoView.menuAtivo();
+                case 2 -> sensorView.menuSensor();
                 case 3 -> System.out.println("Consultar Alertas - em construcao.");
                 case 4 -> System.out.println("Atualizar Manutencoes - em construcao.");
                 case 8 -> {

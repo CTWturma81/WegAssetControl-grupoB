@@ -1,6 +1,7 @@
 package view;
 
 import controller.AtivoController;
+import controller.SetorController;
 import enums.StatusAtivo;
 import exception.AppException;
 import model.entity.AtivoIndustrial;
@@ -12,9 +13,11 @@ import java.util.Scanner;
 public class AtivoView {
 
     Scanner input = new Scanner(System.in);
-    AtivoController ativoController;
+    private AtivoController ativoController;
+    private SetorController setorController;
 
-    public AtivoView(AtivoController ativoController) {
+    public AtivoView(AtivoController ativoController, SetorController setorController) {
+        this.setorController = setorController;
         this.ativoController = ativoController;
     }
 
@@ -63,12 +66,10 @@ public class AtivoView {
         String modelo = input.nextLine();
 
         System.out.println("Digite o nome do setor do ativo: ");
-        String nomeSetor = input.nextLine();
+        Integer id = input.nextInt();
+        input.nextLine();
 
-        System.out.println("Digite a descriçao do setor do ativo: ");
-        String descricaoSetor = input.nextLine();
-
-        Setor setor = new Setor(nomeSetor, descricaoSetor);
+        Setor setor = setorController.buscarSetor(id);
 
         System.out.println("Digite o status do ativo:" +
                 "1 - NORMAL" +
@@ -96,6 +97,8 @@ public class AtivoView {
     public void buscar(){
         System.out.println("Digite o id do ativo que deseja buscar: ");
         Integer id = input.nextInt();
+        input.nextLine();
+
         ativoController.buscarAtivoIndustrialPorID(id);
 
         System.out.println("Ativo buscado com sucesso");
@@ -104,6 +107,7 @@ public class AtivoView {
     public void editar() {
         System.out.println("Digite o id do ativo que deseja buscar: ");
         Integer idAtivo = input.nextInt();
+        input.nextLine();
 
         System.out.println("Digite o nome do ativo: ");
         String nome = input.nextLine();
@@ -120,13 +124,11 @@ public class AtivoView {
         System.out.println("Digite o modelo do ativo: ");
         String modelo = input.nextLine();
 
-        System.out.println("Digite o nome do setor do ativo: ");
-        String nomeSetor = input.nextLine();
+        System.out.println("Digite o id do setor: ");
+        Integer id = input.nextInt();
+        input.nextLine();
 
-        System.out.println("Digite a descriçao do setor do ativo: ");
-        String descricaoSetor = input.nextLine();
-
-        Setor setor = new Setor(nomeSetor, descricaoSetor);
+        Setor setor = setorController.buscarSetor(id);
 
         System.out.println("Digite o status do ativo:" +
                 "1 - NORMAL" +
@@ -144,7 +146,7 @@ public class AtivoView {
             case 3 -> StatusAtivo.CRITICO;
             case 4 -> StatusAtivo.EM_MANUTENCAO;
             case 5 -> StatusAtivo.INATIVO;
-            default -> throw new AppException("Coloque um valor valido");
+            default -> StatusAtivo.valueOf(null);
         };
 
         AtivoIndustrial ativoIndustrial = new AtivoIndustrial(codigoPatrimonial, nome, tipo, ciclagem, modelo, setor, statusAtivo);
@@ -156,6 +158,8 @@ public class AtivoView {
     public void inativar(){
         System.out.println("Digite o id do ativo que deseja inativar: ");
         Integer id = input.nextInt();
+        input.nextLine();
+
         ativoController.inativarAtivoIndustrial(id);
 
         System.out.println("Ativo inativado com sucesso");
@@ -177,7 +181,7 @@ public class AtivoView {
             case 3 -> StatusAtivo.CRITICO;
             case 4 -> StatusAtivo.EM_MANUTENCAO;
             case 5 -> StatusAtivo.INATIVO;
-            default -> throw new AppException("Coloque um valor valido");
+            default -> StatusAtivo.valueOf(null);
         };
 
          ativoController.listarAtivoIndustrialStatus(statusAtivo);

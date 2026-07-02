@@ -25,6 +25,7 @@ public class GerenciarSetores {
             System.out.println("5 - Inativar Setor");
             System.out.println("0 - Sair");
             opcao = input.nextInt();
+            input.nextLine();
 
             switch (opcao){
                 case 1:
@@ -68,6 +69,9 @@ public class GerenciarSetores {
 
     public Integer lerId(){
         System.out.println("Digite o id do setor: ");
-        return input.nextInt();
+        Integer id = input.nextInt();
+        input.nextLine();
+
+        return id;
     }
 }
