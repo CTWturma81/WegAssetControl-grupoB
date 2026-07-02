@@ -10,14 +10,16 @@ public class MenuAdministrador {
     private AtivoView ativoView;
     private SensorView sensorView;
     private GerenciarTecnicos gerenciarTecnicos;
+    private ManutencaoView manutencaoView;
 
-    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos) {
+    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos,ManutencaoView manutencaoView) {
         this.scanner = scanner;
         this.gerenciarUsuarios = gerenciarUsuarios;
         this.gerenciarSetores = gerenciarSetores;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
         this.gerenciarTecnicos = gerenciarTecnicos;
+        this.manutencaoView = manutencaoView;
     }
 
     public boolean menuAdm(){
@@ -43,7 +45,7 @@ public class MenuAdministrador {
                 case 4 -> sensorView.menuSensor();
                 case 5 -> System.out.println("Gerenciar Alertas ");
                 case 6 -> gerenciarTecnicos.subMenuTecnico();
-                case 7 -> System.out.println("Gerenciar Manutencoes ");
+                case 7 -> manutencaoView.menuManutencao();
                 case 8 -> System.out.println("Relatorios");
                 case 9 -> {
                     System.out.println("Saindo...");
