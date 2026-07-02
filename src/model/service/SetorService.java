@@ -36,8 +36,8 @@ public class SetorService {
         return setor;
     }
 
-    public List<Setor> listarSetores(){
-        List<Setor> setores = new ArrayList<>(setorRepository.listarTodos().values());
+    public Collection<Setor> listarSetores(){
+        Collection<Setor> setores = new ArrayList<>(setorRepository.listarTodos().values());
 
         if(setores.isEmpty()){
             throw new AppException("ERRO: Nenhum setor cadastrado.");

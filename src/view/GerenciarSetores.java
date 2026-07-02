@@ -27,13 +27,31 @@ public class GerenciarSetores {
             opcao = input.nextInt();
 
             switch (opcao){
-                case 1 -> setorController.cadastrarSetor();
-                case 2 -> setorController.listarSetor();
-                case 3 -> setorController.buscarSetor();
-                case 4 -> setorController.editarSetor();
-                case 5 -> setorController.inativarSetor();
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção invalida");
+                case 1:
+                    Setor setor = lerDadosSetor();
+                    setorController.cadastrarSetor(setor);
+                    break;
+                case 2:
+                    setorController.listarSetor();
+                    break;
+                case 3:
+                    Integer id = lerId();
+                    setorController.buscarSetor(id);
+                    break;
+                case 4:
+                    Setor setorEditar = lerDadosSetor();
+                    setorController.editarSetor(setorEditar);
+                    break;
+                case 5:
+                    Integer idInativar = lerId();
+                    setorController.inativarSetor(idInativar);
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção invalida");
+                    break;
             }
         }
     }
