@@ -19,30 +19,62 @@ public class GerenciarTecnicos {
         int opcao = 1;
 
         while(opcao != 0){
-            System.out.println("1 - Cadastrar técnicos");
-            System.out.println("2 - Listar técnicos");
-            System.out.println("3 - Editar técnicos");
-            System.out.println("4 - Inativar técnicos");
-            System.out.println("0 - sair");
-            System.out.print("Opção: ");
+            ConsoleUtils.telaPadrao();
+            exibirMenu();
+            System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
+
             opcao = lerOpcao();
 
             switch (opcao){
-                case 1 -> cadastrar();
-                case 2 -> listar();
-                case 3 -> editar();
-                case 4 -> inativar();
-                case 0 -> System.out.println("saindo...");
-                default -> System.out.println("Opção invalida");
+                case 1 -> {
+                    cadastrar();
+                    aguardarEnter();
+                }
+                case 2 -> {
+                    listar();
+                    aguardarEnter();
+                }
+                case 3 -> {
+                    editar();
+                    aguardarEnter();
+                }
+                case 4 -> {
+                    inativar();
+                    aguardarEnter();
+                }
+                case 0 -> mensagemSucesso("Saindo...");
+                default -> {
+                    mensagemErro("Opção inválida.");
+                    aguardarEnter();
+                }
             }
         }
+    }
+
+    private void exibirMenu(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "      GERENCIAR TÉCNICOS          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Cadastrar Técnico             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Listar Técnicos               " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Editar Técnico                " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Inativar Técnico              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Voltar                        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
     }
 
     public void cadastrar() {
         Tecnico tecnico = lerDadosTecnicos();
         boolean sucesso = tecnicoController.cadastrarTecnico(tecnico);
         if (sucesso) {
-            System.out.println("Tecnico cadastrado com sucesso!");
+            mensagemSucesso("Técnico cadastrado com sucesso!");
         }
     }
 
@@ -59,7 +91,7 @@ public class GerenciarTecnicos {
         editarTecnico.setId(id);
         boolean sucesso = tecnicoController.editarTecnico(editarTecnico);
         if (sucesso) {
-            System.out.println("Tecnico editado com sucesso!");
+            mensagemSucesso("Técnico editado com sucesso!");
         }
     }
 
@@ -67,27 +99,27 @@ public class GerenciarTecnicos {
         Integer id = lerId();
         boolean sucesso = tecnicoController.inativarTecnico(id);
         if (sucesso) {
-            System.out.println("Tecnico inativado com sucesso!");
+            mensagemSucesso("Técnico inativado com sucesso!");
         }
     }
 
     public Tecnico lerDadosTecnicos(){
-        System.out.println("Nome: ");
+        System.out.print("Nome: ");
         String nome = input.nextLine();
 
-        System.out.println("Matricula: ");
+        System.out.print("Matrícula: ");
         String matricula = input.nextLine();
 
-        System.out.println("Especialidade: ");
+        System.out.print("Especialidade: ");
         String especialidade = input.nextLine();
 
         return new Tecnico(nome, matricula, especialidade);
     }
 
     public Integer lerId(){
-        System.out.println("Digite o ID: ");
+        System.out.print("Digite o ID: ");
         while(!input.hasNextInt()){
-            System.out.println("Digite um número válido.");
+            mensagemErro("Digite um número válido.");
             input.next();
         }
         Integer id = input.nextInt();
@@ -100,9 +132,22 @@ public class GerenciarTecnicos {
             try {
                 return Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e){
-                System.out.println("Opção inválida. Digite um número.");
-                System.out.print("Opção: ");
+                mensagemErro("Opção inválida. Digite um número.");
+                System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             }
         }
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        input.nextLine();
     }
 }
