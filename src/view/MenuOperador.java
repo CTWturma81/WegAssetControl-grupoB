@@ -1,7 +1,5 @@
 package view;
 
-import util.ConsoleUtils;
-
 import java.util.Scanner;
 
 public class MenuOperador {
@@ -15,6 +13,7 @@ public class MenuOperador {
         this.scanner = scanner;
         this.ativoView = ativoView;
         this.gerenciarSetores = gerenciarSetores;
+        this.alertaView = alertaView;
     }
 
     public boolean menuOperador(){

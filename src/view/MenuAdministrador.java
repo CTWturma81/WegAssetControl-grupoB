@@ -1,7 +1,5 @@
 package view;
 
-import util.ConsoleUtils;
-
 import java.util.Scanner;
 
 public class MenuAdministrador {
@@ -13,8 +11,9 @@ public class MenuAdministrador {
     private SensorView sensorView;
     private GerenciarTecnicos gerenciarTecnicos;
     private AlertaView alertaView;
+    private ManutencaoView manutencaoView;
 
-    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos, AlertaView alertaView) {
+    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos, AlertaView alertaView, ManutencaoView manutencaoView) {
         this.scanner = scanner;
         this.gerenciarUsuarios = gerenciarUsuarios;
         this.gerenciarSetores = gerenciarSetores;
@@ -22,6 +21,7 @@ public class MenuAdministrador {
         this.sensorView = sensorView;
         this.gerenciarTecnicos = gerenciarTecnicos;
         this.alertaView = alertaView;
+        this.manutencaoView = manutencaoView;
     }
 
     public boolean menuAdm(){

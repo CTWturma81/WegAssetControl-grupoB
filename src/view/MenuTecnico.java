@@ -1,7 +1,5 @@
 package view;
 
-import util.ConsoleUtils;
-
 import java.util.Scanner;
 
 public class MenuTecnico {
@@ -12,11 +10,12 @@ public class MenuTecnico {
     private ManutencaoView manutencaoView;
     private AlertaView alertaView;
 
-    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView, AlertaView alertaView) {
+    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView, AlertaView alertaView, ManutencaoView manutencaoView) {
         this.scanner = scanner;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
         this.alertaView = alertaView;
+        this.manutencaoView = manutencaoView;
     }
 
     public boolean menuTecnico(){
@@ -29,8 +28,8 @@ public class MenuTecnico {
             switch (opcao) {
                 case 1 -> ativoView.menuAtivo();
                 case 2 -> sensorView.menuSensor();
-                case 3 -> avisoEmDesenvolvimento("Consultar Alertas");
-                case 4 -> avisoEmDesenvolvimento("Atualizar Manutenções");
+                case 3 -> alertaView.menuAlerta();
+                case 4 -> manutencaoView.menuManutencao();
                 case 8 -> {
                     mensagemSucesso("Saindo...");
                     aguardarEnter();
@@ -60,7 +59,7 @@ public class MenuTecnico {
         System.out.println(azul + negrito + "  ║ " + branco + "1 - Consultar Ativos                 " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "2 - Consultar Sensores               " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "3 - Consultar Alertas                " + azul + "║" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "4 - Atualizar Manutencoes Atribuidas " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Consultar Manutencoes            " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ╠══════════════════════════════════════╣" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "8 - Logout                           " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema                 " + azul + "║" + reset);
@@ -77,11 +76,6 @@ public class MenuTecnico {
                 System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             }
         }
-    }
-
-    private void avisoEmDesenvolvimento(String nomeModulo){
-        System.out.println(ConsoleUtils.BRANCO + "\n  " + nomeModulo + " (em desenvolvimento)" + ConsoleUtils.RESET);
-        aguardarEnter();
     }
 
     private void mensagemSucesso(String texto){

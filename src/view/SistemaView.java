@@ -5,7 +5,6 @@ import controller.UsuarioController;
 import model.entity.Usuario;
 import enums.PerfilAcesso;
 import exception.AppException;
-import util.ConsoleUtils;
 
 import java.util.Scanner;
 

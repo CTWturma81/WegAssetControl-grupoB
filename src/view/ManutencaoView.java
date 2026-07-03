@@ -3,7 +3,6 @@ package view;
 import controller.AtivoController;
 import controller.ManutencaoController;
 import controller.TecnicoController;
-import enums.StatusManutencao;
 import model.entity.AtivoIndustrial;
 import model.entity.Manutencao;
 import model.entity.Tecnico;
@@ -32,89 +31,112 @@ public class ManutencaoView {
             System.out.println("2 - Atribuir manutenção a um técnico");
             System.out.println("3 - Registrar observação");
             System.out.println("4 - Finalizar manutenção");
-            System.out.println("5 - Listar manutenção abertas");
-            System.out.println("6 - Listar manutenção por tecnicos");
+            System.out.println("5 - Listar manutenções abertas");
+            System.out.println("6 - Listar manutenções por técnico");
             System.out.println("0 - Sair");
-            opcao = input.nextInt();
-            input.nextLine();
+            System.out.print("Opção: ");
+            opcao = lerOpcao();
 
             switch (opcao){
-                case 1 -> {
-                    abrir();
-                }
-                case 2 -> {
-                    atribuirManutencao();
-                }
-                case 3 -> {
-                    registrar();
-                }
-                case 4 -> {
-                    finalizar();
-                }
-                case 5 -> {
-
-                }
-                case 6 -> {
-
-                }
+                case 1 -> abrir();
+                case 2 -> atribuirManutencao();
+                case 3 -> registrar();
+                case 4 -> finalizar();
+                case 5 -> listarAbertas();
+                case 6 -> listarPorTecnico();
                 case 0 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção inválida");
             }
         }
     }
 
-    public void abrir(){
-        System.out.println("Insira o id do ativo industrial: ");
-        Integer idAtivo = input.nextInt();
-
+    public void abrir() {
+        Integer idAtivo = lerId("ativo industrial");
         AtivoIndustrial ativoIndustrial = ativoController.buscarAtivoIndustrialPorID(idAtivo);
 
-        System.out.println("Insira o id do tecnico: ");
-        Integer idTecnico = input.nextInt();
-        input.nextLine();
-
-        Tecnico tecnico = tecnicoController.buscarTecnico(idTecnico);
-
-        System.out.println("Insira a descrição do problema: ");
+        System.out.print("Insira a descrição do problema: ");
         String descricao = input.nextLine();
 
-        System.out.println("Insira a observação tecnica");
-        String observacao = input.nextLine();
+        Integer idTecnico = lerId("técnico");
+        Tecnico tecnico = tecnicoController.buscarTecnico(idTecnico);
 
-        System.out.println("Insira o status da Manutenção(ABERTAS, EM_MANUTENCAO, FINALIZADA)");
-        StatusManutencao statusManutencao = StatusManutencao.valueOf(input.nextLine().toUpperCase());
+        Manutencao manutencao = new Manutencao(ativoIndustrial, tecnico, descricao);
 
-        Manutencao manutencao = new Manutencao(ativoIndustrial,tecnico,descricao,observacao,statusManutencao);
+        boolean sucesso = manutencaoController.abrirManutencao(manutencao);
+
+        if (sucesso) {
+            System.out.println("Manutenção aberta com sucesso!");
+        }
     }
 
     public void atribuirManutencao(){
-        System.out.println("Insira o id da manutenção: ");
-        Integer idManutencao = input.nextInt();
-
-        System.out.println("Insira o id do tecnico: ");
-        Integer idTecnico = input.nextInt();
-        input.nextLine();
+        Integer idManutencao = lerId("manutenção");
+        Integer idTecnico = lerId("tecnico");
 
         Tecnico tecnico = tecnicoController.buscarTecnico(idTecnico);
 
-        manutencaoController.atribuirTecnicoManutencao(idManutencao, tecnico);
+        boolean sucesso = manutencaoController.atribuirTecnicoManutencao(idManutencao, tecnico);
+        if (sucesso) {
+            System.out.println("Técnico atribuído com sucesso!");
+        }
     }
 
     public void registrar(){
-        System.out.println("Insira o id da manutenção: ");
-        Integer idManutencao = input.nextInt();
-        input.nextLine();
+        Integer idManutencao = lerId("manutenção");
 
-        System.out.println("Insira a observação tecnica");
+        System.out.println("Insira a observação técnica: ");
         String observacao = input.nextLine();
 
-        manutencaoController.registrarObservacao(idManutencao, observacao);
+        boolean sucesso = manutencaoController.registrarObservacao(idManutencao, observacao);
+        if (sucesso) {
+            System.out.println("Observação registrada com sucesso!");
+        }
     }
 
     public void finalizar(){
-        System.out.println("Insira o id da manutenção: ");
-        Integer idManutencao = input.nextInt();
-        input.nextLine();
+        Integer idManutencao = lerId("manutenção");
 
-        manutencaoController.finalizarManutenção(idManutencao);
+        boolean sucesso = manutencaoController.finalizarManutencao(idManutencao);
+        if (sucesso) {
+            System.out.println("Manutenção finalizada com sucesso!");
+        }
+    }
+
+    public void listarAbertas(){
+        Collection<Manutencao> manutencoes = manutencaoController.listarManutencaoAberta();
+        if (manutencoes != null) {
+            manutencoes.forEach(System.out::println);
+        }
+    }
+
+    public void listarPorTecnico(){
+        Integer idTecnico = lerId("tecnico");
+
+        Collection<Manutencao> manutencoes = manutencaoController.listarManutencaoTecnico(idTecnico);
+        if (manutencoes != null) {
+            manutencoes.forEach(System.out::println);
+        }
+    }
+
+    private Integer lerId(String entidade){
+        System.out.println("Digite o ID do " + entidade + ": ");
+        while(!input.hasNextInt()){
+            System.out.println("Digite um número válido.");
+            input.next();
+        }
+        Integer id = input.nextInt();
+        input.nextLine();
+        return id;
+    }
+
+    private int lerOpcao(){
+        while (true){
+            try {
+                return Integer.parseInt(input.nextLine().trim());
+            } catch (NumberFormatException e){
+                System.out.println("Opção inválida. Digite um número.");
+                System.out.print("Opção: ");
+            }
+        }
     }
 }

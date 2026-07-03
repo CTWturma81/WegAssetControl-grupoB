@@ -16,12 +16,11 @@ public class Manutencao {
     private LocalDate dataAbertura;
     private LocalDate dataFinalizacao;
 
-    public Manutencao(AtivoIndustrial ativoIndustrial, Tecnico tecnico, String descricaoProblema, String observacaoTecnica, StatusManutencao status){
+    public Manutencao(AtivoIndustrial ativoIndustrial, Tecnico tecnico, String descricaoProblema){
         setAtivoIndustrial(ativoIndustrial);
         setTecnico(tecnico);
         setDescricaoProblema(descricaoProblema);
-        setObservacaoTecnica(observacaoTecnica);
-        setStatus(status);
+        this.status = StatusManutencao.ABERTA;
         this.dataAbertura = LocalDate.now();
     }
 
@@ -70,9 +69,6 @@ public class Manutencao {
     }
 
     public void setObservacaoTecnica(String observacaoTecnica){
-        if(observacaoTecnica.isBlank()){
-            throw new AppException("ERRO: A observação técnica deve ser preenchida.");
-        }
         this.observacaoTecnica = observacaoTecnica;
     }
 
