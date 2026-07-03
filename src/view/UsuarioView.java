@@ -44,7 +44,10 @@ public class UsuarioView {
 
     public Integer lerId(){
         System.out.println("Digite o Id: ");
-        return scanner.nextInt();
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+
+        return id;
     }
 
     public void exibirUsuario(Usuario usuario){
