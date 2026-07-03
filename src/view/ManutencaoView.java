@@ -72,7 +72,7 @@ public class ManutencaoView {
         Integer idTecnico = input.nextInt();
         input.nextLine();
 
-        Tecnico tecnico = tecnicoController.buscarTecnicos(idTecnico);
+        Tecnico tecnico = tecnicoController.buscarTecnico(idTecnico);
 
         System.out.println("Insira a descrição do problema: ");
         String descricao = input.nextLine();
@@ -94,7 +94,7 @@ public class ManutencaoView {
         Integer idTecnico = input.nextInt();
         input.nextLine();
 
-        Tecnico tecnico = tecnicoController.buscarTecnicos(idTecnico);
+        Tecnico tecnico = tecnicoController.buscarTecnico(idTecnico);
 
         manutencaoController.atribuirTecnicoManutencao(idManutencao, tecnico);
     }

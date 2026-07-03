@@ -9,8 +9,9 @@ public class MenuOperador {
     private final Scanner scanner;
     private AtivoView ativoView;
     private GerenciarSetores gerenciarSetores;
+    private AlertaView alertaView;
 
-    public MenuOperador(Scanner scanner, AtivoView ativoView, GerenciarSetores gerenciarSetores) {
+    public MenuOperador(Scanner scanner, AtivoView ativoView, GerenciarSetores gerenciarSetores, AlertaView alertaView) {
         this.scanner = scanner;
         this.ativoView = ativoView;
         this.gerenciarSetores = gerenciarSetores;
@@ -26,7 +27,7 @@ public class MenuOperador {
             switch (opcao) {
                 case 1 -> ativoView.menuAtivo();
                 case 2 -> gerenciarSetores.menuSetor();
-                case 3 -> avisoEmDesenvolvimento("Consultar Alertas");
+                case 3 -> alertaView.menuAlerta();
                 case 4 -> {
                     mensagemSucesso("Saindo...");
                     aguardarEnter();
