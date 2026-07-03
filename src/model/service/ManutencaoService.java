@@ -9,13 +9,20 @@ import model.repository.ManutencaoRepository;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 
 public class ManutencaoService {
 
     private ManutencaoRepository manutencaoRepositorio;
 
+    public ManutencaoService(ManutencaoRepository manutencaoRepositorio){
+        this.manutencaoRepositorio = manutencaoRepositorio;
+    }
+
     public Manutencao abrirManutencao(Manutencao manutencao) {
+
+        if(manutencao.getAtivoIndustrial() == null){
+            throw new AppException("ERRO: Ativo Industrial não pode ser vazio.");
+        }
 
         manutencao.setStatus(StatusManutencao.ABERTA);
         manutencao.setDataAbertura(LocalDate.now());
@@ -28,13 +35,12 @@ public class ManutencaoService {
         Manutencao manutencao = buscarManutencao(manutencaoId);
         verificarSeFinalizada(manutencao);
 
-        if (tecnico == null && !tecnico.isAtivo()){
+        if (tecnico == null || !tecnico.isAtivo()){
             throw new AppException("ERRO: Não é possível atribuir um técnico inativo.");
         }
 
         manutencao.setTecnico(tecnico);
         return manutencaoRepositorio.atualizar(manutencao);
-
     }
 
     public Manutencao registrarObservacao(Integer manutencaoId, String observacaoTecnica){
@@ -49,7 +55,7 @@ public class ManutencaoService {
         return manutencaoRepositorio.atualizar(manutencao);
     }
 
-    public Manutencao finalizarManutencao(Integer manutencaoId){
+    public void finalizarManutencao(Integer manutencaoId){
         Manutencao manutencao = buscarManutencao(manutencaoId);
         verificarSeFinalizada(manutencao);
 
@@ -59,7 +65,7 @@ public class ManutencaoService {
         manutencao.setStatus(StatusManutencao.FINALIZADA);
         manutencao.setDataFinalizacao(LocalDate.now());
 
-        return manutencaoRepositorio.atualizar(manutencao);
+        manutencaoRepositorio.atualizar(manutencao);
     }
 
     private Manutencao buscarManutencao (Integer id){
@@ -80,22 +86,20 @@ public class ManutencaoService {
         Collection<Manutencao> manutencao = manutencaoRepositorio.listarAbertas();
 
         if(manutencao.isEmpty()){
-            throw new AppException("Erro: Não há nenhuma manutenção aberta");
+            throw new AppException("ERRO: Não há nenhuma manutenção aberta.");
         }
 
         return manutencao;
     }
 
     public Collection<Manutencao> listarManutencaoTecnico(Integer id){
-        Collection<Manutencao> tecnico = manutencaoRepositorio.listarPorTecnico(id);
+        Collection<Manutencao> manutencoes = manutencaoRepositorio.listarPorTecnico(id);
 
-        if(tecnico.isEmpty()){
-            throw new AppException("Erro: Não há nenhuma manutenção para ser listada");
+        if(manutencoes.isEmpty()){
+            throw new AppException("ERRO: Não há nenhuma manutenção para ser listada.");
         }
 
-        return tecnico;
+        return manutencoes;
     }
 
 }
-
-

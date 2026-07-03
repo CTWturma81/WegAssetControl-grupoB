@@ -61,4 +61,13 @@ public class TecnicoController {
             return false;
         }
     }
+
+    public Tecnico buscarTecnicos(Integer id){
+        try{
+            return tecnicoService.buscarPorId(id);
+        }catch (AppException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
