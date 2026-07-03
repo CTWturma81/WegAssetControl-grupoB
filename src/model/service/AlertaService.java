@@ -6,12 +6,11 @@ import enums.StatusAtivo;
 import exception.AppException;
 import model.entity.Alerta;
 import model.entity.AtivoIndustrial;
-import model.entity.Sensor;
 import model.repository.AlertaRepository;
 import model.repository.AtivoRepository;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Collection;
 
 public class AlertaService {
 
@@ -23,27 +22,25 @@ public class AlertaService {
         this.alertaRepository = alertaRepository;
     }
 
-    public void abrirAlerta(AtivoIndustrial ativoIndustrial, Sensor sensor, String descricao, NivelAlerta nivelAlerta) {
+    public void cadastrarAlerta(Alerta alerta) {
 
-        if (ativoIndustrial == null) {
-            throw new AppException ("ERRO: Ativo Industrial não pode ser vazio");
+        if (alerta.getAtivoIndustrial() == null) {
+            throw new AppException("ERRO: Ativo Industrial não pode ser vazio");
         }
 
-        if(sensor == null) {
+        if (alerta.getSensor() == null) {
             throw new AppException("ERRO: Sensor não pode ser vazio");
         }
 
-        if (ativoIndustrial.getStatusAtivo() == StatusAtivo.INATIVO) {
+        if (alerta.getAtivoIndustrial().getStatusAtivo() == StatusAtivo.INATIVO) {
             throw new AppException("ERRO: Ativo não pode ser INATIVO");
         }
 
-        if(sensor.getStatusAtivo() == StatusAtivo.INATIVO) {
-            throw new AppException("ERRO: Status não pode ser INATIVO");
+        if (alerta.getSensor().getStatusAtivo() == StatusAtivo.INATIVO) {
+            throw new AppException("ERRO: Sensor não pode ser INATIVO");
         }
 
-        Alerta alerta = new Alerta(ativoIndustrial, sensor, descricao, nivelAlerta);
-
-        alterarStatusAtivo(ativoIndustrial, nivelAlerta);
+        alterarStatusAtivo(alerta.getAtivoIndustrial(), alerta.getNivelAlerta());
 
         alertaRepository.salvar(alerta);
     }
@@ -59,16 +56,15 @@ public class AlertaService {
         ativoRepository.atualizarAtivo(ativoIndustrial.getId(), ativoIndustrial);
     }
 
-
-    public void finalizarAlerta(int id) {
+    public void finalizarAlerta(Integer id) {
 
         Alerta alerta = alertaRepository.buscarPorId(id);
 
-        if(alerta == null) {
+        if (alerta == null) {
             throw new AppException("ERRO: O alerta com esse ID não foi encontrado");
         }
 
-        if(alerta.getStatusAlerta() == StatusAlerta.FINALIZADO) {
+        if (alerta.getStatusAlerta() == StatusAlerta.FINALIZADO) {
             throw new AppException("ERRO: Esse alerta já está finalizado");
         }
 
@@ -78,25 +74,45 @@ public class AlertaService {
         alertaRepository.atualizar(alerta);
     }
 
-    public List<Alerta> listarTodos() {
-        return alertaRepository.listarTodos();
-    }
+    public Collection<Alerta> listarTodos() {
+        Collection<Alerta> alertas = alertaRepository.listarTodos();
 
-    public List<Alerta> listarAbertos() {
-        return alertaRepository.listarAbertos();
-    }
-
-    public List<Alerta> listarPorAtivo(AtivoIndustrial ativoIndustrial) {
-        if (ativoIndustrial == null) {
-            throw new AppException("ERRO: Ativo Industrial não pode ser vazio");
+        if (alertas.isEmpty()) {
+            throw new AppException("ERRO: Nenhum alerta cadastrado.");
         }
-        return alertaRepository.listarPorAtivo(ativoIndustrial);
+
+        return alertas;
     }
 
-    public List<Alerta> listarCriticosAbertosPorAtivo(AtivoIndustrial ativoIndustrial) {
-        if(ativoIndustrial == null) {
-            throw new AppException("ERRO: Ativo Industrial não pode ser vazio");
+    public Collection<Alerta> listarAbertos() {
+        Collection<Alerta> alertas = alertaRepository.listarAbertos();
+
+        if (alertas.isEmpty()) {
+            throw new AppException("ERRO: Nenhum alerta aberto encontrado.");
         }
-        return alertaRepository.listarCriticosAbertosPorAtivo(ativoIndustrial);
+
+        return alertas;
+    }
+
+    public Collection<Alerta> listarPorAtivo(Integer id) {
+
+        Collection<Alerta> alertas = alertaRepository.listarPorAtivo(id);
+
+        if (alertas.isEmpty()) {
+            throw new AppException("ERRO: Nenhum alerta encontrado para esse ativo.");
+        }
+
+        return alertas;
+    }
+
+    public Collection<Alerta> listarCriticosAbertosPorAtivo(Integer id) {
+
+        Collection<Alerta> alertas = alertaRepository.listarCriticosAbertosPorAtivo(id);
+
+        if (alertas.isEmpty()) {
+            throw new AppException("ERRO: Nenhum alerta crítico aberto encontrado para esse ativo.");
+        }
+
+        return alertas;
     }
 }
