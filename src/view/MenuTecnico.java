@@ -9,11 +9,13 @@ public class MenuTecnico {
     private final Scanner scanner;
     private AtivoView ativoView;
     private SensorView sensorView;
+    private ManutencaoView manutencaoView;
 
-    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView) {
+    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView, ManutencaoView manutencaoView) {
         this.scanner = scanner;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
+        this.manutencaoView = manutencaoView;
     }
 
     public boolean menuTecnico(){
@@ -33,6 +35,7 @@ public class MenuTecnico {
                     aguardarEnter();
                     return true;
                 }
+
                 case 0 -> {
                     return false;
                 }

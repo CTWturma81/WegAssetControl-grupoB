@@ -16,14 +16,13 @@ public class Manutencao {
     private LocalDate dataAbertura;
     private LocalDate dataFinalizacao;
 
-    public Manutencao(AtivoIndustrial ativoIndustrial, Tecnico tecnico, String descricaoProblema, String observacaoTecnica, StatusManutencao status, LocalDate dataAbertura, LocalDate dataFinalizacao){
+    public Manutencao(AtivoIndustrial ativoIndustrial, Tecnico tecnico, String descricaoProblema, String observacaoTecnica, StatusManutencao status){
         setAtivoIndustrial(ativoIndustrial);
         setTecnico(tecnico);
         setDescricaoProblema(descricaoProblema);
         setObservacaoTecnica(observacaoTecnica);
         setStatus(status);
-        setDataAbertura(dataAbertura);
-        setDataFinalizacao(dataFinalizacao);
+        this.dataAbertura = LocalDate.now();
     }
 
     public void setId (Integer id){

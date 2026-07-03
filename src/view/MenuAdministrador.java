@@ -12,14 +12,16 @@ public class MenuAdministrador {
     private AtivoView ativoView;
     private SensorView sensorView;
     private GerenciarTecnicos gerenciarTecnicos;
+    private ManutencaoView manutencaoView;
 
-    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos) {
+    public MenuAdministrador(Scanner scanner, GerenciarUsuarios gerenciarUsuarios, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos,ManutencaoView manutencaoView) {
         this.scanner = scanner;
         this.gerenciarUsuarios = gerenciarUsuarios;
         this.gerenciarSetores = gerenciarSetores;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
         this.gerenciarTecnicos = gerenciarTecnicos;
+        this.manutencaoView = manutencaoView;
     }
 
     public boolean menuAdm(){
