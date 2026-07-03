@@ -2,10 +2,8 @@ package view;
 
 import controller.AtivoController;
 import controller.SensorController;
-import enums.StatusAtivo;
 import model.entity.AtivoIndustrial;
 import model.entity.Sensor;
-import model.entity.Setor;
 
 import java.util.Collection;
 import java.util.Scanner;
@@ -25,7 +23,7 @@ public class SensorView {
     public void menuSensor(){
         int opcao = 1;
         while(opcao != 0){
-            System.out.println("\n====MENU SENSOR=====");
+            System.out.println("\n=== MENU SENSOR ===");
             System.out.println("1 - Cadastrar Sensor");
             System.out.println("2 - Listar Sensores");
             System.out.println("3 - Buscar Sensor por ID");
@@ -34,150 +32,172 @@ public class SensorView {
             System.out.println("6 - Atualizar valor atual do Sensor");
             System.out.println("7 - Inativar sensor");
             System.out.println("0 - Sair");
-            System.out.println("Opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            System.out.print("Opção: ");
+            opcao = lerOpcao();
 
             switch (opcao){
-                case 1:
-                    cadastrar();
-                    break;
-                case 2:
-                    Collection<Sensor> sensores = sensorController.listarSensor();
-                    if (sensores == null || sensores.isEmpty()) {
-                        System.out.println("Nenhum sensor cadastrado.");
-                    } else {
-                        sensores.forEach(System.out::println);
-                    }
-                    break;
-                case 3:
-                    buscarId();
-                    break;
-                case 4:
-                    buscarCodigo();
-                    break;
-                case 5:
-                    listarAtivo();
-                    break;
-                case 6:
-                    atualizarValorAtualSensor();
-                    break;
-                case 7:
-                    inativar();
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("Opção invalida");
-                    break;
+                case 1 -> cadastrar();
+                case 2 -> listar();
+                case 3 -> buscarId();
+                case 4 -> buscarCodigo();
+                case 5 -> listarAtivo();
+                case 6 -> atualizarValorAtualSensor();
+                case 7 -> inativar();
+                case 0 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção Inválida");
             }
         }
     }
 
     public void cadastrar(){
-        scanner.nextLine();
         System.out.println("Digite o código do sensor: ");
         String codigo = scanner.nextLine();
 
-        System.out.println("Tipo: (TEMPERATURA, VIBRACAO, CORRENTE): ");
-        String tipo = scanner.nextLine();
+        String tipo = lerTipo();
 
         System.out.println("Digite o valor do sensor: ");
-        Double valorAtual = scanner.nextDouble();
-        scanner.nextLine();
+        Double valorAtual = lerDouble();
 
-        System.out.println("Digite a unidade de medida: ");
-        String unidadeMedida = scanner.nextLine();
+        String unidadeMedida = lerUnidadeMedida();
 
-        System.out.println("Digite o ID do ativo industrial que desejas cadastrar: ");
-        Integer id = scanner.nextInt();
-        scanner.nextLine();
-
+        Integer id = lerId("ativo industrial");
         AtivoIndustrial ativoIndustrial = ativoController.buscarAtivoIndustrialPorID(id);
 
-        Sensor sensor = new Sensor(codigo, tipo, ativoIndustrial, valorAtual, unidadeMedida, StatusAtivo.NORMAL);
-        sensorController.cadastrarSensor(sensor);
+        Sensor sensor = new Sensor(codigo, tipo, ativoIndustrial, valorAtual, unidadeMedida);
+        boolean sucesso = sensorController.cadastrarSensor(sensor);
 
-        System.out.println("Sensor cadastrado com sucesso");
+        if (sucesso) {
+            System.out.println("Sensor cadastrado com sucesso!");
+        }
+    }
+
+    public void listar() {
+        Collection<Sensor> sensores = sensorController.listarSensor();
+        if (sensores != null) {
+            sensores.forEach(System.out::println);
+        }
     }
 
     public void buscarId(){
-        System.out.println("Digite o ID do sensor: ");
-        Integer id = scanner.nextInt();
-        scanner.nextLine();
+        Integer id = lerId("sensor");
+        Sensor sensor = sensorController.buscarSensorPorId(id);
 
-        sensorController.buscarSensorPorId(id);
-        System.out.println("Sensor buscado com sucesso");
+        if (sensor != null) {
+            System.out.println("Sensor encontrado!");
+            System.out.println(sensor);
+        }
     }
 
     public void buscarCodigo(){
         System.out.println("Digite o codigo do sensor: ");
         String codigo = scanner.nextLine();
 
-        sensorController.buscarSensorPorCodigo(codigo);
-        System.out.println("Sensor buscado com sucesso: ");
+        Sensor sensor = sensorController.buscarSensorPorCodigo(codigo);
+
+        if (sensor != null) {
+            System.out.println("Sensor encontrado!");
+            System.out.println(sensor);
+        }
     }
 
     public void listarAtivo(){
-        System.out.println("Digite o ID do ativo industrial: ");
-        Integer id = scanner.nextInt();
-        scanner.nextLine();
-
+        Integer id = lerId("ativo industrial");
         AtivoIndustrial ativoIndustrial = ativoController.buscarAtivoIndustrialPorID(id);
-        sensorController.listarSensorPorAtivo(ativoIndustrial);
+
+        Collection<Sensor> sensores = sensorController.listarSensorPorAtivo(ativoIndustrial);
+        if (sensores != null) {
+            sensores.forEach(System.out::println);
+        }
     }
 
     public void atualizarValorAtualSensor(){
-        System.out.println("Digite o Id do sensor: ");
-        Integer id = scanner.nextInt();
+        Integer id = lerId("sensor");
 
         System.out.println("Digite o valor do sensor: ");
-        Double valorNovo = scanner.nextDouble();
-        scanner.nextLine();
+        Double valorNovo = lerDouble();
 
-        sensorController.atualizarValorAtualSensor(id, valorNovo);
+        boolean sucesso = sensorController.atualizarValorAtualSensor(id, valorNovo);
+        if (sucesso) {
+            System.out.println("Valor atualizado com sucesso!");
+        }
     }
 
     public void inativar(){
         System.out.println("Digite o codigo do sensor: ");
         String codigo = scanner.nextLine();
 
-        sensorController.inativarSensor(codigo);
-    }
-
-    public Integer lerIdAtivo(){
-        scanner.nextLine();
-        System.out.println("Digite o ID do ativo: ");
-        Integer idAtivo = scanner.nextInt();
-        scanner.nextLine();
-
-        return idAtivo;
-    }
-
-    public void exibirSensor(Sensor sensor){
-        System.out.println("ID: " + sensor.getId());
-        System.out.println("Código: " + sensor.getCodigo());
-        System.out.println("Tipo: " + sensor.getTipo());
-        System.out.println("Ativo: "+ sensor.getAtivoIndustrial().getNome());
-        System.out.println("Valor atual: " + sensor.getValorAtual());
-        System.out.println("Unidade de medida: " + sensor.getUnidadeMedida());
-        System.out.println("Status: " + sensor.getStatusAtivo());
-    }
-
-    public void exibirSensores(Collection<Sensor> sensores){
-        for(Sensor s : sensores){
-            exibirSensor(s);
-            System.out.println("====================================");
+        boolean sucesso = sensorController.inativarSensor(codigo);
+        if (sucesso) {
+            System.out.println("Sensor inativado com sucesso!");
         }
     }
 
-    public void exibirMensagem(String mensagem){
-        System.out.println(mensagem);
+    private Integer lerId(String entidade){
+        System.out.println("Digite o ID do " + entidade + ": ");
+        while(!scanner.hasNextInt()){
+            System.out.println("Digite um número válido.");
+            scanner.next();
+        }
+        Integer id = scanner.nextInt();
+        scanner.nextLine();
+        return id;
     }
 
-    public Double lerValorAtual(){
-        System.out.println("Digite o valor novo: ");
-        return scanner.nextDouble();
+    private Double lerDouble(){
+        while(!scanner.hasNextDouble()){
+            System.out.println("Digite um número válido.");
+            scanner.next();
+        }
+        Double valor = scanner.nextDouble();
+        scanner.nextLine();
+        return valor;
     }
+
+    private int lerOpcao(){
+        while (true){
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e){
+                System.out.println("Opção inválida. Digite um número.");
+                System.out.print("Opção: ");
+            }
+        }
+    }
+
+    private String lerTipo(){
+        while(true){
+            System.out.println("Tipo do sensor:");
+            System.out.println("1 - TEMPERATURA");
+            System.out.println("2 - VIBRACAO");
+            System.out.println("3 - CORRENTE");
+            System.out.print("Escolha: ");
+            String opcao = scanner.nextLine().trim();
+
+            switch (opcao){
+                case "1": return "TEMPERATURA";
+                case "2": return "VIBRACAO";
+                case "3": return "CORRENTE";
+                default: System.out.println("Opção inválida, tente novamente.");
+            }
+        }
+    }
+
+    private String lerUnidadeMedida(){
+        while(true){
+            System.out.println("Unidade de medida:");
+            System.out.println("1 - °C (Celsius)");
+            System.out.println("2 - mm/s (Vibração)");
+            System.out.println("3 - A (Amperes)");
+            System.out.print("Escolha: ");
+            String opcao = scanner.nextLine().trim();
+
+            switch (opcao){
+                case "1": return "°C";
+                case "2": return "mm/s";
+                case "3": return "A";
+                default: System.out.println("Opção inválida, tente novamente.");
+            }
+        }
+    }
+
 }

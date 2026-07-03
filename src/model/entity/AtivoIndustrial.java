@@ -13,14 +13,14 @@ public class AtivoIndustrial {
     private Setor setor;
     private StatusAtivo status;
 
-    public AtivoIndustrial(String codigoPatrimonial, String nome, String tipo, String ciclagem, String modelo, Setor setor, StatusAtivo status){
+    public AtivoIndustrial(String codigoPatrimonial, String nome, String tipo, String ciclagem, String modelo, Setor setor){
         setCodigoPatromonial(codigoPatrimonial);
         setNome(nome);
         setTipo(tipo);
         setCiclagem(ciclagem);
         setModelo(modelo);
         setSetor(setor);
-        setStatusAtivos(status);
+        this.status = StatusAtivo.NORMAL;
     }
 
     public Integer getId(){
@@ -124,7 +124,7 @@ public class AtivoIndustrial {
                 "Tipo: " + tipo + "\n" +
                 "Ciclagem: " + ciclagem + "\n" +
                 "Modelo: " + modelo + "\n" +
-                "Setor: " + setor + "\n" +
+                "Setor: " + setor.getNome() + "\n" +
                 "Status: " + status + "\n" +
                 "-----------------------------";
     }

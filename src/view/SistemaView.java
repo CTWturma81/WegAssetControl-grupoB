@@ -5,6 +5,7 @@ import controller.UsuarioController;
 import model.entity.Usuario;
 import enums.PerfilAcesso;
 import exception.AppException;
+import util.ConsoleUtils;
 
 import java.util.Scanner;
 
@@ -33,11 +34,9 @@ public class SistemaView {
 
         while(sistemaAtivo){
             try {
-                System.out.println("\n=== BEM-VINDO ===");
-                System.out.println("1 - Login");
-                System.out.println("2 - Cadastrar usuário");
-                System.out.println("0 - Sair");
-                System.out.print("Escolha uma opção: ");
+                ConsoleUtils.telaPadrao();
+                exibirMenuInicial();
+                System.out.print(ConsoleUtils.BRANCO + "  Escolha uma opção: " + ConsoleUtils.RESET);
                 String opcao = scanner.nextLine().trim();
 
                 switch (opcao){
@@ -52,46 +51,68 @@ public class SistemaView {
                     }
                     case "2" -> cadastrarUsuario();
                     case "0" -> sistemaAtivo = false;
-                    default -> System.out.println("Opção inválida.");
+                    default -> mensagemErro("Opção inválida.");
                 }
 
             } catch (RuntimeException e){
-                System.out.println("Erro inesperado no sistema: " + e.getMessage());
+                mensagemErro("Erro inesperado no sistema: " + e.getMessage());
+                aguardarEnter();
             }
         }
 
-        System.out.println("Sistema encerrado. Ate logo!");
+        ConsoleUtils.telaPadrao();
+        System.out.println(ConsoleUtils.AZUL_BRILHANTE + ConsoleUtils.NEGRITO +
+                "                     Sistema encerrado. Até logo!\n" + ConsoleUtils.RESET);
+    }
+
+    private void exibirMenuInicial(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "           BEM-VINDO              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Login                         " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Cadastrar usuário             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Sair                          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
     }
 
     private void cadastrarUsuario(){
-        System.out.println("=== CADASTRO DE USUÁRIO ===");
-        System.out.print("Nome: ");
+        ConsoleUtils.telaPadrao();
+        System.out.println(ConsoleUtils.AZUL_BRILHANTE + ConsoleUtils.NEGRITO + "  === CADASTRO DE USUÁRIO ===\n" + ConsoleUtils.RESET);
+
+        System.out.print(ConsoleUtils.BRANCO + "  Nome: " + ConsoleUtils.RESET);
         String nome = scanner.nextLine();
 
-        System.out.print("Login: ");
+        System.out.print(ConsoleUtils.BRANCO + "  Login: " + ConsoleUtils.RESET);
         String login = scanner.nextLine();
 
-        System.out.print("Senha: ");
+        System.out.print(ConsoleUtils.BRANCO + "  Senha: " + ConsoleUtils.RESET);
         String senha = scanner.nextLine();
 
         PerfilAcesso perfil = lerPerfil();
 
         try {
             usuarioController.cadastrarUsuario(new Usuario(nome, login, senha, perfil));
-            System.out.println("Usuário cadastrado com sucesso! Faça login para continuar.");
+            mensagemSucesso("Usuário cadastrado com sucesso! Faça login para continuar.");
         } catch (AppException e){
-            System.out.println("Erro ao cadastrar: " + e.getMessage());
+            mensagemErro("Erro ao cadastrar: " + e.getMessage());
         }
+        aguardarEnter();
     }
 
     private PerfilAcesso lerPerfil(){
         while(true){
-            System.out.println("Perfil:");
-            System.out.println("1 - ADMINISTRADOR");
-            System.out.println("2 - SUPERVISOR");
-            System.out.println("3 - TECNICO");
-            System.out.println("4 - OPERADOR");
-            System.out.print("Escolha: ");
+            System.out.println(ConsoleUtils.BRANCO + "\n  Perfil:" + ConsoleUtils.RESET);
+            System.out.println(ConsoleUtils.BRANCO + "  1 - ADMINISTRADOR" + ConsoleUtils.RESET);
+            System.out.println(ConsoleUtils.BRANCO + "  2 - SUPERVISOR" + ConsoleUtils.RESET);
+            System.out.println(ConsoleUtils.BRANCO + "  3 - TECNICO" + ConsoleUtils.RESET);
+            System.out.println(ConsoleUtils.BRANCO + "  4 - OPERADOR" + ConsoleUtils.RESET);
+            System.out.print(ConsoleUtils.BRANCO + "  Escolha: " + ConsoleUtils.RESET);
             String opcao = scanner.nextLine().trim();
 
             switch (opcao){
@@ -99,7 +120,7 @@ public class SistemaView {
                 case "2": return PerfilAcesso.SUPERVISOR;
                 case "3": return PerfilAcesso.TECNICO;
                 case "4": return PerfilAcesso.OPERADOR;
-                default: System.out.println("Opção inválida, tente novamente.");
+                default: mensagemErro("Opção inválida, tente novamente.");
             }
         }
     }
@@ -114,26 +135,42 @@ public class SistemaView {
     }
 
     public Usuario telaLogin(){
-        System.out.println("=== LOGIN ===");
-        System.out.print("Digite o seu login: ");
+        ConsoleUtils.telaPadrao();
+        System.out.println(ConsoleUtils.AZUL_BRILHANTE + ConsoleUtils.NEGRITO + "  === LOGIN ===\n" + ConsoleUtils.RESET);
+
+        System.out.print(ConsoleUtils.BRANCO + "  Digite o seu login: " + ConsoleUtils.RESET);
         String login = scanner.nextLine();
 
-        System.out.print("Digite a sua senha: ");
+        System.out.print(ConsoleUtils.BRANCO + "  Digite a sua senha: " + ConsoleUtils.RESET);
         String senha = scanner.nextLine();
 
         return authController.login(login, senha);
     }
 
     public boolean perguntarTentarNovamente(){
-        System.out.print("Login ou senha invalidos. Deseja tentar novamente? (S/N): ");
+        mensagemErro("Login ou senha inválidos.");
+        System.out.print(ConsoleUtils.BRANCO + "  Deseja tentar novamente? (S/N): " + ConsoleUtils.RESET);
         String resposta = scanner.nextLine().trim();
 
         while(!resposta.equalsIgnoreCase("S") && !resposta.equalsIgnoreCase("N")){
-            System.out.print("Opcao invalida. Digite S para tentar novamente ou N para encerrar: ");
+            System.out.print(ConsoleUtils.BRANCO + "  Opção inválida. Digite S para tentar novamente ou N para encerrar: " + ConsoleUtils.RESET);
             resposta = scanner.nextLine().trim();
         }
 
         return resposta.equalsIgnoreCase("S");
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        scanner.nextLine();
     }
 
 }

@@ -8,7 +8,6 @@ import model.repository.SensorRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class SensorService {
 
@@ -20,13 +19,8 @@ public class SensorService {
 
     public void cadastrarSensor(Sensor sensor){
 
-        ArrayList<Sensor> sensores = new ArrayList<>(sensorRepository.listarTodos());
-
-        if(sensores.contains(sensor.getCodigo())){
+        if(sensorRepository.buscarPorCodigo(sensor.getCodigo()) != null){
             throw new AppException("Erro: código do sensor tem que ser único");
-        }
-        if(sensores.contains(sensor.getTipo())){
-            throw new AppException("Erro: tipo do sensor tem que ser único");
         }
         if(sensor.getStatusAtivo() == StatusAtivo.INATIVO){
             throw new AppException("Erro: Ao cadastrar sensor ele deve estar ativado");
@@ -78,11 +72,30 @@ public class SensorService {
         return sensor;
     }
 
-    public void atualizarValorSensor(int id,Double valorAtual){
-        sensorRepository.buscarPorId(id).setValorAtual(valorAtual);
+    public void atualizarValorSensor(Integer id, Double valorAtual){
+        Sensor sensor = sensorRepository.buscarPorId(id);
+
+        if(sensor == null){
+            throw new AppException("Erro: nenhum sensor foi encontrado");
+        }
+        if(valorAtual < 0){
+            throw new AppException("Erro: Valor atual não pode ser negativo");
+        }
+
+        sensor.setValorAtual(valorAtual);
     }
 
     public void inativarSensor(String codigo) {
-        sensorRepository.buscarPorCodigo(codigo).setStatusAtivo(StatusAtivo.valueOf("INATIVO"));
+        Sensor sensor = sensorRepository.buscarPorCodigo(codigo);
+
+        if(sensor == null){
+            throw new AppException("Erro: nenhum sensor foi encontrado");
+        }
+
+        if(sensor.getStatusAtivo() == StatusAtivo.INATIVO) {
+            throw new AppException("ERRO: Sensor já está inativado");
+        }
+
+        sensor.setStatusAtivo(StatusAtivo.INATIVO);
     }
 }

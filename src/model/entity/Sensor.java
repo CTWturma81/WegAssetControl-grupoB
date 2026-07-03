@@ -14,18 +14,23 @@ public class Sensor {
     private String unidadeMedida;
     private StatusAtivo statusAtivo;
 
-    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, String unidadeMedida, StatusAtivo statusAtivo) {
+    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, String unidadeMedida) {
         setCodigo(codigo);
         setTipo(tipo);
         setAtivoIndustrial(ativoIndustrial);
         setValorAtual(valorAtual);
         setUnidadeMedida(unidadeMedida);
-        setStatusAtivo(statusAtivo);
+        this.statusAtivo = StatusAtivo.NORMAL;
     }
 
     public Integer getId() {
         return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getCodigo() {
         return codigo;
     }

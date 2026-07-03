@@ -30,50 +30,56 @@ public class GerenciarSetores {
             input.nextLine();
 
             switch (opcao) {
-                case 1 -> {
-                    Setor setor = lerDadosSetor();
-                    boolean sucesso = setorController.cadastrarSetor(setor);
-                    if (sucesso) {
-                        System.out.println("Setor cadastrado com sucesso!");
-                    }
-                }
-                case 2 -> {
-                    Collection<Setor> setores = setorController.listarSetor();
-                    if (setores != null) {
-                        setores.forEach(System.out::println);
-                    }
-                }
-                case 3 -> {
-                    Integer id = lerId();
-                    Setor setorBusca = setorController.buscarSetor(id);
-                    if (setorBusca != null) {
-                        System.out.println("Setor Encontrado!");
-                        System.out.println(setorBusca);
-                    }
-                }
-                case 4 -> {
-                    Integer id = lerId();
-                    Setor setorEditar = lerDadosSetor();
-                    setorEditar.setId(id);
-                    boolean sucesso = setorController.editarSetor(setorEditar);
-                    if (sucesso) {
-                        System.out.println("Setor editado com sucesso!");
-                    }
-                }
-                case 5 -> {
-                    Integer idInativar = lerId();
-                    boolean sucesso = setorController.inativarSetor(idInativar);
-                    if (sucesso) {
-                        System.out.println("Setor inativado com sucesso!");
-                    }
-                }
-                case 0 -> {
-                    System.out.println("Saindo...");
-                }
-                default -> {
-                    System.out.println("Opção invalida");
-                }
+                case 1 -> cadastrar();
+                case 2 -> listar();
+                case 3 -> buscar();
+                case 4 -> editar();
+                case 5 -> inativar();
+                case 0 -> System.out.println("Saindo...");
+                default -> System.out.println("Opção invalida");
             }
+        }
+    }
+
+    public void cadastrar() {
+        Setor setor = lerDadosSetor();
+        boolean sucesso = setorController.cadastrarSetor(setor);
+        if (sucesso) {
+            System.out.println("Setor cadastrado com sucesso!");
+        }
+    }
+
+    public void listar() {
+        Collection<Setor> setores = setorController.listarSetor();
+        if (setores != null) {
+            setores.forEach(System.out::println);
+        }
+    }
+
+    public void buscar() {
+        Integer id = lerId();
+        Setor setorBusca = setorController.buscarSetor(id);
+        if (setorBusca != null) {
+            System.out.println("Setor Encontrado!");
+            System.out.println(setorBusca);
+        }
+    }
+
+    public void editar() {
+        Integer id = lerId();
+        Setor setorEditar = lerDadosSetor();
+        setorEditar.setId(id);
+        boolean sucesso = setorController.editarSetor(setorEditar);
+        if (sucesso) {
+            System.out.println("Setor editado com sucesso!");
+        }
+    }
+
+    public void inativar() {
+        Integer idInativar = lerId();
+        boolean sucesso = setorController.inativarSetor(idInativar);
+        if (sucesso) {
+            System.out.println("Setor inativado com sucesso!");
         }
     }
 

@@ -1,5 +1,7 @@
 package view;
 
+import util.ConsoleUtils;
+
 import java.util.Scanner;
 
 public class MenuAdministrador {
@@ -22,18 +24,9 @@ public class MenuAdministrador {
 
     public boolean menuAdm(){
         while(true){
-            System.out.println("\n=== MENU ADMINISTRADOR ===");
-            System.out.println("1 - Gerenciar Usuarios");
-            System.out.println("2 - Gerenciar Setores");
-            System.out.println("3 - Gerenciar Ativos");
-            System.out.println("4 - Gerenciar Sensores");
-            System.out.println("5 - Gerenciar Alertas");
-            System.out.println("6 - Gerenciar Tecnicos");
-            System.out.println("7 - Gerenciar Manutencoes");
-            System.out.println("8 - Relatorios");
-            System.out.println("9 - Logout");
-            System.out.println("0 - Encerrar Sistema");
-            System.out.print("Opcao: ");
+            ConsoleUtils.telaPadrao();
+            exibirMenu();
+            System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             int opcao = lerOpcao();
 
             switch (opcao) {
@@ -41,20 +34,48 @@ public class MenuAdministrador {
                 case 2 -> gerenciarSetores.menuSetor();
                 case 3 -> ativoView.menuAtivo();
                 case 4 -> sensorView.menuSensor();
-                case 5 -> System.out.println("Gerenciar Alertas ");
+                case 5 -> avisoEmDesenvolvimento("Gerenciar Alertas");
                 case 6 -> gerenciarTecnicos.subMenuTecnico();
-                case 7 -> System.out.println("Gerenciar Manutencoes ");
-                case 8 -> System.out.println("Relatorios");
+                case 7 -> avisoEmDesenvolvimento("Gerenciar Manutenções");
+                case 8 -> avisoEmDesenvolvimento("Relatórios");
                 case 9 -> {
-                    System.out.println("Saindo...");
+                    mensagemSucesso("Saindo...");
+                    aguardarEnter();
                     return true;
                 }
                 case 0 -> {
                     return false;
                 }
-                default -> System.out.println("Opcao invalida.");
+                default -> {
+                    mensagemErro("Opção inválida.");
+                    aguardarEnter();
+                }
             }
         }
+    }
+
+    private void exibirMenu(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "        MENU ADMINISTRADOR        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Gerenciar Usuarios            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Gerenciar Setores             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Gerenciar Ativos              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Gerenciar Sensores            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "5 - Gerenciar Alertas             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "6 - Gerenciar Tecnicos            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "7 - Gerenciar Manutencoes         " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "8 - Relatorios                    " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "9 - Logout                        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
     }
 
     private int lerOpcao(){
@@ -62,9 +83,28 @@ public class MenuAdministrador {
             try {
                 return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e){
-                System.out.println("Opcao invalida. Digite um numero.");
-                System.out.print("Opcao: ");
+                mensagemErro("Opção inválida. Digite um número.");
+                System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             }
         }
     }
+
+    private void avisoEmDesenvolvimento(String nomeModulo){
+        System.out.println(ConsoleUtils.BRANCO + "\n  " + nomeModulo + " (em desenvolvimento)" + ConsoleUtils.RESET);
+        aguardarEnter();
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        scanner.nextLine();
+    }
+
 }
