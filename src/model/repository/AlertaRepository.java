@@ -37,20 +37,20 @@ public class AlertaRepository {
         return abertos;
     }
 
-    public List<Alerta> listarPorAtivo(AtivoIndustrial ativoIndustrial) {
+    public List<Alerta> listarPorAtivo(Integer id) {
         List<Alerta> resultado = new ArrayList<>();
         for (Alerta alerta : alertas.values()) {
-            if(alerta.getAtivoIndustrial().getId() == ativoIndustrial.getId()) {
+            if(alerta.getAtivoIndustrial().getId().equals(id)) {
                 resultado.add(alerta);
             }
         }
         return resultado;
     }
 
-    public List<Alerta> listarCriticosAbertosPorAtivo (AtivoIndustrial ativoIndustrial) {
+    public List<Alerta> listarCriticosAbertosPorAtivo (Integer id) {
         List<Alerta> resultado = new ArrayList<>();
         for (Alerta alerta : alertas.values()) {
-            if(alerta.getAtivoIndustrial().getId() == ativoIndustrial.getId()
+            if(alerta.getAtivoIndustrial().getId().equals(id)
                 && alerta.getStatusAlerta() == StatusAlerta.ABERTO
                         && alerta.getNivelAlerta() == NivelAlerta.ALTO) {
 

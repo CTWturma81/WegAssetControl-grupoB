@@ -15,11 +15,11 @@ public class TecnicoService {
         this.tecnicoRepository = tecnicoRepository;
     }
 
-    public Tecnico cadastrarTecnico(Tecnico tecnico){
+    public void cadastrarTecnico(Tecnico tecnico){
         if(tecnicoRepository.buscarPorMatricula(tecnico.getMatricula()) != null){
             throw new AppException("ERRO: Matrícula já está em uso.");
         }
-        return tecnicoRepository.salvar(tecnico);
+        tecnicoRepository.salvar(tecnico);
     }
 
     public List<Tecnico> listarTecnicos(){
@@ -30,22 +30,24 @@ public class TecnicoService {
         return tecnicos;
     }
 
-    public Tecnico editarTecnico(Integer id, Tecnico tecnicoAtualizado){
-        Tecnico tecnico = tecnicoRepository.buscarPorId(id);
+    public void editarTecnico(Tecnico tecnicoAtualizado){
+        Tecnico tecnico = tecnicoRepository.buscarPorId(tecnicoAtualizado.getId());
         if(tecnico == null){
-            throw new AppException("ERRO: Técnico não encotrado.");
+            throw new AppException("ERRO: Técnico não encontrado.");
         }
         if(!tecnico.getMatricula().equals(tecnicoAtualizado.getMatricula()) && tecnicoRepository.buscarPorMatricula(tecnicoAtualizado.getMatricula()) != null){
             throw new AppException("ERRO: Matricula já está em uso.");
         }
-        tecnicoAtualizado.setId(id);
-        return tecnicoRepository.atualizar(tecnicoAtualizado);
+        tecnicoRepository.atualizar(tecnicoAtualizado);
     }
 
     public void inativarTecnico(Integer id){
         Tecnico tecnico = tecnicoRepository.buscarPorId(id);
         if(tecnico == null){
             throw new AppException("ERRO: Técnico não encontrado.");
+        }
+        if(!tecnico.isAtivo()) {
+            throw new AppException("ERRO: Técnico já está inativo.");
         }
         tecnico.setAtivo(false);
     }

@@ -13,14 +13,14 @@ public class AtivoIndustrial {
     private Setor setor;
     private StatusAtivo status;
 
-    public AtivoIndustrial(String codigoPatrimonial, String nome, String tipo, String ciclagem, String modelo, Setor setor, StatusAtivo status){
+    public AtivoIndustrial(String codigoPatrimonial, String nome, String tipo, String ciclagem, String modelo, Setor setor){
         setCodigoPatromonial(codigoPatrimonial);
         setNome(nome);
         setTipo(tipo);
         setCiclagem(ciclagem);
         setModelo(modelo);
         setSetor(setor);
-        setStatusAtivos(status);
+        this.status = StatusAtivo.NORMAL;
     }
 
     public Integer getId(){
@@ -117,15 +117,15 @@ public class AtivoIndustrial {
 
     @Override
     public String toString() {
-        return "AtivoIndustrial{" +
-                "id=" +  id +
-                ", codigoPatrimonial='" + codigoPatrimonial + '\'' +
-                ", nome='" + nome + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ciclagem='" + ciclagem + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", setor=" + setor +
-                ", status=" + status +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Código Patrimonial: " + codigoPatrimonial + "\n" +
+                "Nome: " + nome + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Ciclagem: " + ciclagem + "\n" +
+                "Modelo: " + modelo + "\n" +
+                "Setor: " + setor.getNome() + "\n" +
+                "Status: " + status + "\n" +
+                "-----------------------------";
     }
 }

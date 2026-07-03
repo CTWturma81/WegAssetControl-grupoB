@@ -3,7 +3,6 @@ package controller;
 import exception.AppException;
 import model.entity.Usuario;
 import model.service.UsuarioService;
-import view.UsuarioView;
 
 import java.util.Collection;
 
@@ -15,43 +14,51 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    public void cadastrarUsuario(Usuario usuario){
+    public boolean cadastrarUsuario(Usuario usuario){
         try {
             usuarioService.cadastrarUsuario(usuario);
+            return true;
         } catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void listarUsuarios(){
+    public Collection<Usuario> listarUsuarios(){
         try{
-            usuarioService.listarUsuarios();
+            return usuarioService.listarUsuarios();
         } catch (AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void atualizarUsuario(Integer id, Usuario novoUsuario){
+    public boolean atualizarUsuario(Usuario novoUsuario){
         try{
-            usuarioService.atualizarUsuario(id, novoUsuario);
+            usuarioService.atualizarUsuario(novoUsuario);
+            return true;
         } catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void inativarUsuario(Integer id){
+    public boolean inativarUsuario(Integer id){
         try{
             usuarioService.inativarUsuario(id);
+            return true;
         } catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void buscarUsuario(Integer id){
+    public Usuario buscarUsuario(Integer id){
         try{
-            usuarioService.buscarPorId(id);
+            return usuarioService.buscarPorId(id);
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return null;
         }
     }
 

@@ -3,6 +3,7 @@ package view;
 import controller.TecnicoController;
 import model.entity.Tecnico;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GerenciarTecnicos {
@@ -23,31 +24,50 @@ public class GerenciarTecnicos {
             System.out.println("3 - Editar técnicos");
             System.out.println("4 - Inativar técnicos");
             System.out.println("0 - sair");
-            opcao = input.nextInt();
-            input.nextLine();
+            System.out.print("Opção: ");
+            opcao = lerOpcao();
 
             switch (opcao){
-
-              case 1 -> {
-                  Tecnico tecnico = lerDadosTecnicos();
-                  tecnicoController.cadastrarTecnico(tecnico);
-              }
-
-              case 2 -> tecnicoController.listarTecnico();
-
-              case 3 -> {
-                  Integer id = lerId();
-                  Tecnico editarTecnico = lerDadosTecnicos();
-                  tecnicoController.editarTecnico(id, editarTecnico);
-              }
-
-              case 4 -> {
-                  Integer id = lerId();
-                  tecnicoController.inativarTecnicos(id);
-              }
-              case 0 -> System.out.println("saindo...");
-              default -> System.out.println("Opção invalida");
+                case 1 -> cadastrar();
+                case 2 -> listar();
+                case 3 -> editar();
+                case 4 -> inativar();
+                case 0 -> System.out.println("saindo...");
+                default -> System.out.println("Opção invalida");
             }
+        }
+    }
+
+    public void cadastrar() {
+        Tecnico tecnico = lerDadosTecnicos();
+        boolean sucesso = tecnicoController.cadastrarTecnico(tecnico);
+        if (sucesso) {
+            System.out.println("Tecnico cadastrado com sucesso!");
+        }
+    }
+
+    public void listar() {
+        Collection<Tecnico> tecnicos = tecnicoController.listarTecnico();
+        if (tecnicos != null) {
+            tecnicos.forEach(System.out::println);
+        }
+    }
+
+    public void editar() {
+        Integer id = lerId();
+        Tecnico editarTecnico = lerDadosTecnicos();
+        editarTecnico.setId(id);
+        boolean sucesso = tecnicoController.editarTecnico(editarTecnico);
+        if (sucesso) {
+            System.out.println("Tecnico editado com sucesso!");
+        }
+    }
+
+    public void inativar() {
+        Integer id = lerId();
+        boolean sucesso = tecnicoController.inativarTecnico(id);
+        if (sucesso) {
+            System.out.println("Tecnico inativado com sucesso!");
         }
     }
 
@@ -65,9 +85,24 @@ public class GerenciarTecnicos {
     }
 
     public Integer lerId(){
-        System.out.println("digite seu id");
+        System.out.println("Digite o ID: ");
+        while(!input.hasNextInt()){
+            System.out.println("Digite um número válido.");
+            input.next();
+        }
         Integer id = input.nextInt();
         input.nextLine();
         return id;
+    }
+
+    private int lerOpcao(){
+        while (true){
+            try {
+                return Integer.parseInt(input.nextLine().trim());
+            } catch (NumberFormatException e){
+                System.out.println("Opção inválida. Digite um número.");
+                System.out.print("Opção: ");
+            }
+        }
     }
 }

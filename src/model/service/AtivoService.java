@@ -65,8 +65,8 @@ public class AtivoService {
         return ativos;
     }
 
-    public AtivoIndustrial editarAtivo(Integer id, AtivoIndustrial ativoIndustrial){
-        AtivoIndustrial ativo = ativoRepository.buscarPorId(id);
+    public void editarAtivo(AtivoIndustrial ativoIndustrial){
+        AtivoIndustrial ativo = ativoRepository.buscarPorId(ativoIndustrial.getId());
         if(ativo == null){
             throw new AppException("ERRO: Ativo não encontrado.");
         }
@@ -74,18 +74,20 @@ public class AtivoService {
             throw new AppException("ERRO: Código patrimonial já em uso.");
         }
         if(!ativoIndustrial.getSetor().getAtivo()){
-            throw new AppException("ERRO: Setor inativos não pode receber ativos.");
+            throw new AppException("ERRO: Setor inativo não pode receber ativos.");
         }
-        ativoIndustrial.setId(id);
-        return ativoRepository.atualizarAtivo(id, ativoIndustrial);
+        ativoRepository.atualizarAtivo(ativoIndustrial.getId(), ativoIndustrial);
     }
 
     public void inativarAtivo(Integer id){
         AtivoIndustrial ativo = ativoRepository.buscarPorId(id);
-        if(ativo == null){
-            throw new AppException("ERRO: Ativo não encontrado.");
+
+        if(ativo.getStatusAtivo() == StatusAtivo.INATIVO) {
+            throw new AppException("ERRO: Ativo já está inativo");
         }
+
         ativo.setStatusAtivos(StatusAtivo.INATIVO);
+        ativoRepository.atualizarAtivo(id, ativo);
     }
 
 }
