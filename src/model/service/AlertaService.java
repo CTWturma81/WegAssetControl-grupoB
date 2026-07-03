@@ -70,6 +70,7 @@ public class AlertaService {
 
         alerta.setStatusAlerta(StatusAlerta.FINALIZADO);
         alerta.setDataFechamento(LocalDate.now());
+        alerta.getAtivoIndustrial().setStatusAtivos(StatusAtivo.NORMAL);
 
         alertaRepository.atualizar(alerta);
     }

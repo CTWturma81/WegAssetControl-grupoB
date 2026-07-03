@@ -20,10 +20,10 @@ public class Alerta {
 
     public Alerta(AtivoIndustrial ativoIndustrial, Sensor sensor, String descricao, NivelAlerta nivelAlerta) {
 
-        setAtivoIndustrial(ativoIndustrial);
-        setSensor(sensor);
-        setDescricao(descricao);
-        setNivelAlerta(nivelAlerta);
+        this.ativoIndustrial = ativoIndustrial;
+        this.sensor = sensor;
+        this.descricao = descricao;
+        this.nivelAlerta = nivelAlerta;
         this.statusAlerta = StatusAlerta.ABERTO;
         this.dataAbertura = LocalDate.now();
         this.dataFechamento = null;
