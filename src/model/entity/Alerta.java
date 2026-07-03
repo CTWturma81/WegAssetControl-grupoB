@@ -118,16 +118,17 @@ public class Alerta {
         this.dataFechamento = dataFechamento;
     }
 
+    @Override
     public String toString() {
-        return "Alerta {" +
-                ", Id: " + id +
-                ", Ativo Industrial: " + ativoIndustrial +
-                ", Sensor: " + sensor +
-                ", Descrição: " + descricao +
-                ", Nível de Alerta: " + nivelAlerta +
-                ", Status de Alerta: " + statusAlerta +
-                ", Data de Abertura: " + dataAbertura +
-                ", Data de Fechamento: " + dataFechamento +
-                "}";
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Ativo Industrial: " + ativoIndustrial + "\n" +
+                "Sensor: " + sensor + "\n" +
+                "Descrição: " + descricao + "\n" +
+                "Nível de Alerta: " + nivelAlerta + "\n" +
+                "Status de Alerta: " + statusAlerta + "\n" +
+                "Data de Abertura: " + dataAbertura + "\n" +
+                "Data de Fechamento: " + dataFechamento + "\n" +
+                "-----------------------------";
     }
 }

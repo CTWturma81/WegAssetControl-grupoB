@@ -6,7 +6,6 @@ import model.entity.Sensor;
 import model.service.SensorService;
 
 import java.util.Collection;
-import java.util.List;
 
 
 public class SensorController {
@@ -17,11 +16,13 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
-    public void cadastrarSensor(Sensor sensor){
+    public boolean cadastrarSensor(Sensor sensor){
         try{
             sensorService.cadastrarSensor(sensor);
+            return true;
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -36,7 +37,7 @@ public class SensorController {
 
     public Sensor buscarSensorPorId(Integer id){
         try{
-             return sensorService.buscarSensorPorId(id);
+            return sensorService.buscarSensorPorId(id);
         }catch (AppException e){
             System.out.println(e.getMessage());
             return null;
@@ -61,19 +62,23 @@ public class SensorController {
         }
     }
 
-    public void atualizarValorAtualSensor(Integer id, Double valor){
+    public boolean atualizarValorAtualSensor(Integer id, Double valor){
         try{
             sensorService.atualizarValorSensor(id, valor);
+            return true;
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void inativarSensor(String codigo){
+    public boolean inativarSensor(String codigo){
         try{
             sensorService.inativarSensor(codigo);
+            return true;
         }catch (AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 }

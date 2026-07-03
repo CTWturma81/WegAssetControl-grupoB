@@ -1,5 +1,7 @@
 package view;
 
+import util.ConsoleUtils;
+
 import java.util.Scanner;
 
 public class MenuOperador {
@@ -16,30 +18,48 @@ public class MenuOperador {
 
     public boolean menuOperador(){
         while(true){
-            System.out.println("\n=== MENU OPERADOR ===");
-            System.out.println("1 - Consultar Ativos");
-            System.out.println("2 - Consultar Setores");
-            System.out.println("3 - Consultar Alertas");
-            System.out.println("4 - Logout");
-            System.out.println("0 - Encerrar Sistema");
-            System.out.print("Opcao: ");
-
+            ConsoleUtils.telaPadrao();
+            exibirMenu();
+            System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             int opcao = lerOpcao();
 
             switch (opcao) {
                 case 1 -> ativoView.menuAtivo();
                 case 2 -> gerenciarSetores.menuSetor();
-                case 3 -> System.out.println("Consultar Alertas");
+                case 3 -> avisoEmDesenvolvimento("Consultar Alertas");
                 case 4 -> {
-                    System.out.println("Saindo...");
+                    mensagemSucesso("Saindo...");
+                    aguardarEnter();
                     return true;
                 }
                 case 0 -> {
                     return false;
                 }
-                default -> System.out.println("Opcao invalida.");
+                default -> {
+                    mensagemErro("Opção inválida.");
+                    aguardarEnter();
+                }
             }
         }
+    }
+
+    private void exibirMenu(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "           MENU OPERADOR          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Consultar Ativos             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Consultar Setores            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Consultar Alertas            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Logout                       " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
     }
 
     private int lerOpcao(){
@@ -47,9 +67,28 @@ public class MenuOperador {
             try {
                 return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e){
-                System.out.println("Opcao invalida. Digite um numero.");
-                System.out.print("Opcao: ");
+                mensagemErro("Opção inválida. Digite um número.");
+                System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             }
         }
     }
+
+    private void avisoEmDesenvolvimento(String nomeModulo){
+        System.out.println(ConsoleUtils.BRANCO + "\n  " + nomeModulo + " (em desenvolvimento)" + ConsoleUtils.RESET);
+        aguardarEnter();
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        scanner.nextLine();
+    }
+
 }

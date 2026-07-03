@@ -3,6 +3,7 @@ package view;
 import controller.TecnicoController;
 import model.entity.Tecnico;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GerenciarTecnicos {
@@ -28,25 +29,31 @@ public class GerenciarTecnicos {
 
             switch (opcao){
 
-              case 1 -> {
-                  Tecnico tecnico = lerDadosTecnicos();
-                  tecnicoController.cadastrarTecnico(tecnico);
-              }
+                case 1 -> {
+                    Tecnico tecnico = lerDadosTecnicos();
+                    tecnicoController.cadastrarTecnico(tecnico);
+                }
 
-              case 2 -> tecnicoController.listarTecnico();
+                case 2 -> {
+                    Collection<Tecnico> tecnicos = tecnicoController.listarTecnico();
+                    if (tecnicos != null) {
+                        tecnicos.forEach(System.out::println);
+                    }
+                }
 
-              case 3 -> {
-                  Integer id = lerId();
-                  Tecnico editarTecnico = lerDadosTecnicos();
-                  tecnicoController.editarTecnico(id, editarTecnico);
-              }
+                case 3 -> {
+                    Integer id = lerId();
+                    Tecnico editarTecnico = lerDadosTecnicos();
+                    editarTecnico.setId(id);
+                    tecnicoController.editarTecnico(editarTecnico);
+                }
 
-              case 4 -> {
-                  Integer id = lerId();
-                  tecnicoController.inativarTecnicos(id);
-              }
-              case 0 -> System.out.println("saindo...");
-              default -> System.out.println("Opção invalida");
+                case 4 -> {
+                    Integer id = lerId();
+                    tecnicoController.inativarTecnico(id);
+                }
+                case 0 -> System.out.println("saindo...");
+                default -> System.out.println("Opção invalida");
             }
         }
     }

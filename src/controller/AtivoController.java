@@ -5,23 +5,23 @@ import exception.AppException;
 import model.entity.AtivoIndustrial;
 import model.service.AtivoService;
 
-import java.sql.SQLOutput;
 import java.util.Collection;
 
 public class AtivoController {
 
     AtivoService ativoService;
 
-
     public AtivoController(AtivoService ativoService){
         this.ativoService = ativoService;
     }
 
-    public void cadastrarAtivoIndustrial(AtivoIndustrial ativoIndustrial){
+    public boolean cadastrarAtivoIndustrial(AtivoIndustrial ativoIndustrial){
         try{
             ativoService.cadastrarAtivo(ativoIndustrial);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -43,19 +43,23 @@ public class AtivoController {
         }
     }
 
-    public void editarAtivoIndustrial(Integer id, AtivoIndustrial ativoIndustrial){
+    public boolean editarAtivoIndustrial(AtivoIndustrial ativoIndustrial){
         try{
-            ativoService.editarAtivo(id, ativoIndustrial);
+            ativoService.editarAtivo(ativoIndustrial);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void inativarAtivoIndustrial(Integer id){
+    public boolean inativarAtivoIndustrial(Integer id){
         try{
             ativoService.inativarAtivo(id);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

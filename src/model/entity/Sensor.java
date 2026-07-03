@@ -14,18 +14,23 @@ public class Sensor {
     private String unidadeMedida;
     private StatusAtivo statusAtivo;
 
-    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, String unidadeMedida, StatusAtivo statusAtivo) {
+    public Sensor(String codigo, String tipo, AtivoIndustrial ativoIndustrial, Double valorAtual, String unidadeMedida) {
         setCodigo(codigo);
         setTipo(tipo);
         setAtivoIndustrial(ativoIndustrial);
         setValorAtual(valorAtual);
         setUnidadeMedida(unidadeMedida);
-        setStatusAtivo(statusAtivo);
+        this.statusAtivo = StatusAtivo.NORMAL;
     }
 
     public Integer getId() {
         return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -101,14 +106,14 @@ public class Sensor {
 
     @Override
     public String toString() {
-        return "Sensor{" +
-                "id=" + id +
-                ", codigo='" + codigo + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ativoIndustrial=" + ativoIndustrial +
-                ", valorAtual=" + valorAtual +
-                ", unidadeMedida=" + unidadeMedida +
-                ", statusAtivo=" + statusAtivo +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Código: " + codigo + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Ativo Industrial: " + (ativoIndustrial != null ? ativoIndustrial.getNome() : "N/A") + "\n" +
+                "Valor Atual: " + valorAtual + "\n" +
+                "Unidade de Medida: " + unidadeMedida + "\n" +
+                "Status: " + statusAtivo + "\n" +
+                "-----------------------------";
     }
 }

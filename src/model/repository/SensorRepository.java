@@ -15,6 +15,7 @@ public class SensorRepository {
     private static Integer idcontador = 1;
 
     public void salvar(Sensor sensor){
+        sensor.setId(idcontador);
         sensorMap.put(idcontador++,sensor);
     }
 

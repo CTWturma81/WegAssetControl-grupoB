@@ -16,12 +16,13 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario cadastrarUsuario(Usuario usuario){
+    public void cadastrarUsuario(Usuario usuario){
 
         if(usuarioRepository.buscarPorLogin(usuario.getLogin()) != null){
             throw new AppException("ERRO: Login já está em uso.");
         }
-        return usuarioRepository.criarUsuario(usuario);
+
+        usuarioRepository.criarUsuario(usuario);
     }
 
     public Collection<Usuario> listarUsuarios(){
@@ -34,41 +35,47 @@ public class UsuarioService {
         return usuarios;
     }
 
-    public Usuario atualizarUsuario(Integer id, Usuario novoUsuario){
-        Usuario usuario = usuarioRepository.buscarPorId(id);
+    public void atualizarUsuario(Usuario novoUsuario){
+        Usuario usuario = usuarioRepository.buscarPorId(novoUsuario.getId());
 
         if(usuario == null){
-            throw  new AppException("ERRO: Usuário não encontrado.");
+            throw new AppException("ERRO: Usuário não encontrado.");
         }
 
         if(!usuario.getLogin().equals(novoUsuario.getLogin()) && usuarioRepository.buscarPorLogin(novoUsuario.getLogin()) != null){
             throw new AppException("ERRO: Login já está em uso.");
         }
 
-        return usuarioRepository.atualizarUsuario(id ,novoUsuario);
+        usuarioRepository.atualizarUsuario(novoUsuario.getId(), novoUsuario);
     }
 
     public void inativarUsuario(Integer id){
         Usuario usuario = usuarioRepository.buscarPorId(id);
 
-        if(usuario == null){
+        if (usuario == null) {
             throw new AppException("ERRO: Usuário não encontrado.");
         }
 
-        if(usuario.getPerfil() == PerfilAcesso.ADMINISTRADOR){
+        if (!usuario.getAtivo()) {
+            throw new AppException("ERRO: O usuário já está inativo");
+        }
+
+        if (usuario.getPerfil() == PerfilAcesso.ADMINISTRADOR) {
             int totalAdminsAtivos = 0;
-            for(Usuario u : usuarioRepository.listarUsuarios()){
-                if(u.getPerfil() == PerfilAcesso.ADMINISTRADOR && u.getAtivo()){
+            for (Usuario u : usuarioRepository.listarUsuarios()) {
+                if (u.getPerfil() == PerfilAcesso.ADMINISTRADOR && u.getAtivo()) {
                     totalAdminsAtivos++;
                 }
             }
 
-            if(totalAdminsAtivos <= 1){
+            if (totalAdminsAtivos <= 1) {
                 throw new AppException("ERRO: Precisa de pelo menos um administrador ativo no sistema");
             }
+
         }
 
         usuario.setAtivo(false);
+        usuarioRepository.atualizarUsuario(id, usuario);
     }
 
     public Usuario buscarPorId(Integer id){

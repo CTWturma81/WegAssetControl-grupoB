@@ -64,12 +64,13 @@ public class Setor {
 
     }
 
+    @Override
     public String toString() {
-        return "Setor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", ativo=" + ativo +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Descrição: " + descricao + "\n" +
+                "Status: " + (ativo ? "Ativo" : "Inativo") + "\n" +
+                "-----------------------------";
     }
 }
