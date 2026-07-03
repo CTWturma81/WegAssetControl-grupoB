@@ -23,16 +23,13 @@ public class SensorService {
         ArrayList<Sensor> sensores = new ArrayList<>(sensorRepository.listarTodos());
 
         if(sensores.contains(sensor.getCodigo())){
-            throw new AppException("Erro: codigo do sensor tem que ser único");
+            throw new AppException("Erro: código do sensor tem que ser único");
         }
         if(sensores.contains(sensor.getTipo())){
             throw new AppException("Erro: tipo do sensor tem que ser único");
         }
-        if(sensorRepository.listarPorAtivo(sensor.getAtivoIndustrial()).isEmpty()){
-            throw new AppException("Erro: O Ativo industrial deve ter vinculo com o sensor");
-        }
         if(sensor.getStatusAtivo() == StatusAtivo.INATIVO){
-            throw new AppException("Erro: Ao cadastrar sensor ele deve estar ativadado");
+            throw new AppException("Erro: Ao cadastrar sensor ele deve estar ativado");
         }
         if(sensor.getValorAtual() < 0){
             throw new AppException("Erro: Valor atual não pode ser negativo");

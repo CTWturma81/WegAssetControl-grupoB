@@ -89,5 +89,15 @@ public class Usuario {
         }
     }
 
+    @Override
+    public String toString() {
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Login: " + login + "\n" +
+                "Perfil: " + perfilAcesso + "\n" +
+                "Status: " + (ativo ? "Ativo" : "Inativo") + "\n" +
+                "-----------------------------";
+    }
 
 }

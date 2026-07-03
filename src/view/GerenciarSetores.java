@@ -3,6 +3,7 @@ package view;
 import controller.SetorController;
 import model.entity.Setor;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GerenciarSetores {
@@ -24,35 +25,54 @@ public class GerenciarSetores {
             System.out.println("4 - Editar Setor");
             System.out.println("5 - Inativar Setor");
             System.out.println("0 - Sair");
+            System.out.print("Opção: ");
             opcao = input.nextInt();
             input.nextLine();
 
-            switch (opcao){
-                case 1:
+            switch (opcao) {
+                case 1 -> {
                     Setor setor = lerDadosSetor();
-                    setorController.cadastrarSetor(setor);
-                    break;
-                case 2:
-                    setorController.listarSetor();
-                    break;
-                case 3:
+                    boolean sucesso = setorController.cadastrarSetor(setor);
+                    if (sucesso) {
+                        System.out.println("Setor cadastrado com sucesso!");
+                    }
+                }
+                case 2 -> {
+                    Collection<Setor> setores = setorController.listarSetor();
+                    if (setores != null) {
+                        setores.forEach(System.out::println);
+                    }
+                }
+                case 3 -> {
                     Integer id = lerId();
-                    setorController.buscarSetor(id);
-                    break;
-                case 4:
+                    Setor setorBusca = setorController.buscarSetor(id);
+                    if (setorBusca != null) {
+                        System.out.println("Setor Encontrado!");
+                        System.out.println(setorBusca);
+                    }
+                }
+                case 4 -> {
+                    Integer id = lerId();
                     Setor setorEditar = lerDadosSetor();
-                    setorController.editarSetor(setorEditar);
-                    break;
-                case 5:
+                    setorEditar.setId(id);
+                    boolean sucesso = setorController.editarSetor(setorEditar);
+                    if (sucesso) {
+                        System.out.println("Setor editado com sucesso!");
+                    }
+                }
+                case 5 -> {
                     Integer idInativar = lerId();
-                    setorController.inativarSetor(idInativar);
-                    break;
-                case 0:
+                    boolean sucesso = setorController.inativarSetor(idInativar);
+                    if (sucesso) {
+                        System.out.println("Setor inativado com sucesso!");
+                    }
+                }
+                case 0 -> {
                     System.out.println("Saindo...");
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Opção invalida");
-                    break;
+                }
             }
         }
     }
@@ -69,9 +89,12 @@ public class GerenciarSetores {
 
     public Integer lerId(){
         System.out.println("Digite o id do setor: ");
+        while(!input.hasNextInt()){
+            System.out.println("Digite um número válido.");
+            input.next();
+        }
         Integer id = input.nextInt();
         input.nextLine();
-
         return id;
     }
 }

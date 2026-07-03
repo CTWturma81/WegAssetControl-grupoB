@@ -5,6 +5,7 @@ import controller.SensorController;
 import enums.StatusAtivo;
 import model.entity.AtivoIndustrial;
 import model.entity.Sensor;
+import model.entity.Setor;
 
 import java.util.Collection;
 import java.util.Scanner;
@@ -38,15 +39,38 @@ public class SensorView {
             scanner.nextLine();
 
             switch (opcao){
-                case 1 -> cadastrar();
-                case 2 -> sensorController.listarSensor();
-                case 3 -> buscarId();
-                case 4 -> buscarCodigo();
-                case 5 -> listarAtivo();
-                case 6 -> atualizarValorAtualSensor();
-                case 7 -> inativar();
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção invalida");
+                case 1:
+                    cadastrar();
+                    break;
+                case 2:
+                    Collection<Sensor> sensores = sensorController.listarSensor();
+                    if (sensores == null || sensores.isEmpty()) {
+                        System.out.println("Nenhum sensor cadastrado.");
+                    } else {
+                        sensores.forEach(System.out::println);
+                    }
+                    break;
+                case 3:
+                    buscarId();
+                    break;
+                case 4:
+                    buscarCodigo();
+                    break;
+                case 5:
+                    listarAtivo();
+                    break;
+                case 6:
+                    atualizarValorAtualSensor();
+                    break;
+                case 7:
+                    inativar();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção invalida");
+                    break;
             }
         }
     }

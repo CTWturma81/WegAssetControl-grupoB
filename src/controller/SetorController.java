@@ -14,11 +14,13 @@ public class SetorController {
         this.setorService = setorService;
     }
 
-    public void cadastrarSetor(Setor setor){
+    public boolean cadastrarSetor(Setor setor){
         try{
             setorService.cadastrarSetor(setor);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -40,19 +42,23 @@ public class SetorController {
         }
     }
 
-    public void editarSetor(Setor setor){
+    public boolean editarSetor(Setor setor){
         try{
             setorService.editarSetor(setor);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void inativarSetor(Integer id){
+    public boolean inativarSetor(Integer id){
         try{
             setorService.inativarSetor(id);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 }

@@ -8,6 +8,7 @@ import model.entity.AtivoIndustrial;
 import model.entity.Setor;
 import model.entity.Usuario;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class AtivoView {
@@ -34,10 +35,18 @@ public class AtivoView {
             System.out.println("7 - Listar ativo por setor");
             System.out.println("0 - Sair");
             opcao = input.nextInt();
+            input.nextLine();
 
             switch(opcao){
                 case 1-> cadastrar();
-                case 2-> ativoController.listarAtivoIndustrial();
+                case 2-> {
+                    Collection<AtivoIndustrial> ativos = ativoController.listarAtivoIndustrial();
+                    if (ativos == null || ativos.isEmpty()) {
+                        System.out.println("Nenhum ativo cadastrado.");
+                    } else {
+                        ativos.forEach(System.out::println);
+                    }
+                }
                 case 3-> buscar();
                 case 4-> editar();
                 case 5-> inativar();
@@ -65,18 +74,18 @@ public class AtivoView {
         System.out.println("Digite o modelo do ativo: ");
         String modelo = input.nextLine();
 
-        System.out.println("Digite o nome do setor do ativo: ");
+        System.out.println("Digite o id do setor do ativo: ");
         Integer id = input.nextInt();
         input.nextLine();
 
         Setor setor = setorController.buscarSetor(id);
 
-        System.out.println("Digite o status do ativo:" +
-                "1 - NORMAL" +
-                "2 - ATENÇÃO" +
-                "3 - CRITICO" +
-                "4 - EM_MANUTENÇÃO" +
-                "5 - INATIVO");
+        System.out.println("Digite o status do ativo:\n" +
+                "1 - NORMAL\n" +
+                "2 - ATENÇÃO\n" +
+                "3 - CRITICO\n" +
+                "4 - EM_MANUTENÇÃO\n" +
+                "5 - INATIVO\n");
         int opcao = input.nextInt();
         input.nextLine();
 
@@ -99,7 +108,7 @@ public class AtivoView {
         Integer id = input.nextInt();
         input.nextLine();
 
-        ativoController.buscarAtivoIndustrialPorID(id);
+        System.out.println(ativoController.buscarAtivoIndustrialPorID(id));
 
         System.out.println("Ativo buscado com sucesso");
     }
@@ -130,12 +139,12 @@ public class AtivoView {
 
         Setor setor = setorController.buscarSetor(id);
 
-        System.out.println("Digite o status do ativo:" +
-                "1 - NORMAL" +
-                "2 - ATENÇÃO" +
-                "3 - CRITICO" +
-                "4 - EM_MANUTENÇÃO" +
-                "5 - INATIVO");
+        System.out.println("Digite o status do ativo:\n" +
+                "1 - NORMAL\n" +
+                "2 - ATENÇÃO\n" +
+                "3 - CRITICO\n" +
+                "4 - EM_MANUTENÇÃO\n" +
+                "5 - INATIVO\n");
         int opcao = input.nextInt();
         input.nextLine();
 

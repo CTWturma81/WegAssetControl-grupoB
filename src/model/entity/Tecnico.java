@@ -72,13 +72,13 @@ public class Tecnico {
 
     @Override
     public String toString() {
-        return "Tecnico{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", especialidade='" + especialidade + '\'' +
-                ", ativo=" + ativo +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Matrícula: " + matricula + "\n" +
+                "Especialidade: " + especialidade + "\n" +
+                "Status: " + (ativo ? "Ativo" : "Inativo") + "\n" +
+                "-----------------------------";
     }
 
 }

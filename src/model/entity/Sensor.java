@@ -101,14 +101,14 @@ public class Sensor {
 
     @Override
     public String toString() {
-        return "Sensor{" +
-                "id=" + id +
-                ", codigo='" + codigo + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ativoIndustrial=" + ativoIndustrial +
-                ", valorAtual=" + valorAtual +
-                ", unidadeMedida=" + unidadeMedida +
-                ", statusAtivo=" + statusAtivo +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Código: " + codigo + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Ativo Industrial: " + (ativoIndustrial != null ? ativoIndustrial.getNome() : "N/A") + "\n" +
+                "Valor Atual: " + valorAtual + "\n" +
+                "Unidade de Medida: " + unidadeMedida + "\n" +
+                "Status: " + statusAtivo + "\n" +
+                "-----------------------------";
     }
 }

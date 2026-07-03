@@ -4,6 +4,7 @@ import controller.UsuarioController;
 import enums.PerfilAcesso;
 import model.entity.Usuario;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GerenciarUsuarios {
@@ -25,33 +26,51 @@ public class GerenciarUsuarios {
             System.out.println("4 - Inativar Usuario");
             System.out.println("5 - Buscar Usuario");
             System.out.println("0 - Sair");
+            System.out.print("Opção: ");
             opcao = input.nextInt();
             input.nextLine();
 
             switch (opcao){
                 case 1 -> {
                     Usuario usuario = lerDadosUsuario();
-                    usuarioController.cadastrarUsuario(usuario);
+                    boolean sucesso = usuarioController.cadastrarUsuario(usuario);
+                    if (sucesso) {
+                        System.out.println("Usuário cadastrado com sucesso!");
+                    }
                 }
 
                 case 2 -> {
-                    usuarioController.listarUsuarios();
+                    Collection<Usuario> usuarios = usuarioController.listarUsuarios();
+                    if (usuarios != null) {
+                        usuarios.forEach(System.out::println);
+                    }
                 }
 
                 case 3 -> {
-                    Integer idAtualizarUsuario = lerId();
+                    Integer id = lerId();
                     Usuario novoUsuario = lerDadosUsuario();
-                    usuarioController.atualizarUsuario(idAtualizarUsuario, novoUsuario);
+                    novoUsuario.setId(id);
+                    boolean sucesso = usuarioController.atualizarUsuario(novoUsuario);
+                    if (sucesso) {
+                        System.out.println("Usuário atualizado com sucesso!");
+                    }
                 }
 
                 case 4 -> {
                     Integer idInativarUsuario = lerId();
-                    usuarioController.inativarUsuario(idInativarUsuario);
+                    boolean sucesso = usuarioController.inativarUsuario(idInativarUsuario);
+                    if (sucesso) {
+                        System.out.println("Usuário inativado com sucesso!");
+                    }
                 }
 
                 case 5 -> {
                     Integer idBuscar = lerId();
-                    usuarioController.buscarUsuario(idBuscar);
+                    Usuario usuarioBusca = usuarioController.buscarUsuario(idBuscar);
+                    if (usuarioBusca != null) {
+                        System.out.println("Usuário Encontrado!");
+                        System.out.println(usuarioBusca);
+                    }
                 }
                 case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção invalida");
@@ -61,22 +80,45 @@ public class GerenciarUsuarios {
 
     public Usuario lerDadosUsuario(){
         System.out.println("Nome: ");
-        String nome = input.next();
+        String nome = input.nextLine();
 
         System.out.println("Login: ");
-        String login = input.next();
+        String login = input.nextLine();
 
         System.out.println("Senha: ");
-        String senha = input.next();
+        String senha = input.nextLine();
 
-        System.out.println("Perfil de acesso (ADMINISTRADOR, SUPERVISOR, TECNICO, OPERADOR): ");
-        PerfilAcesso perfil = PerfilAcesso.valueOf(input.next().toUpperCase());
+        PerfilAcesso perfil = lerPerfil();
 
         return new Usuario(nome, login, senha, perfil);
     }
 
+    public PerfilAcesso lerPerfil(){
+        while(true){
+            System.out.println("Perfil de acesso:");
+            System.out.println("1 - ADMINISTRADOR");
+            System.out.println("2 - SUPERVISOR");
+            System.out.println("3 - TECNICO");
+            System.out.println("4 - OPERADOR");
+            System.out.print("Escolha: ");
+            String opcao = input.nextLine().trim();
+
+            switch (opcao){
+                case "1": return PerfilAcesso.ADMINISTRADOR;
+                case "2": return PerfilAcesso.SUPERVISOR;
+                case "3": return PerfilAcesso.TECNICO;
+                case "4": return PerfilAcesso.OPERADOR;
+                default: System.out.println("Opção inválida, tente novamente.");
+            }
+        }
+    }
+
     public Integer lerId(){
         System.out.println("Digite o ID: ");
+        while(!input.hasNextInt()){
+            System.out.println("Digite um número válido.");
+            input.next();
+        }
         Integer id = input.nextInt();
         input.nextLine();
 

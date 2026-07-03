@@ -30,15 +30,14 @@ public class TecnicoService {
         return tecnicos;
     }
 
-    public Tecnico editarTecnico(Integer id, Tecnico tecnicoAtualizado){
-        Tecnico tecnico = tecnicoRepository.buscarPorId(id);
+    public Tecnico editarTecnico(Tecnico tecnicoAtualizado){
+        Tecnico tecnico = tecnicoRepository.buscarPorId(tecnicoAtualizado.getId());
         if(tecnico == null){
-            throw new AppException("ERRO: Técnico não encotrado.");
+            throw new AppException("ERRO: Técnico não encontrado.");
         }
         if(!tecnico.getMatricula().equals(tecnicoAtualizado.getMatricula()) && tecnicoRepository.buscarPorMatricula(tecnicoAtualizado.getMatricula()) != null){
             throw new AppException("ERRO: Matricula já está em uso.");
         }
-        tecnicoAtualizado.setId(id);
         return tecnicoRepository.atualizar(tecnicoAtualizado);
     }
 

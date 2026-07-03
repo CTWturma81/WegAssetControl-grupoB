@@ -117,15 +117,15 @@ public class AtivoIndustrial {
 
     @Override
     public String toString() {
-        return "AtivoIndustrial{" +
-                "id=" +  id +
-                ", codigoPatrimonial='" + codigoPatrimonial + '\'' +
-                ", nome='" + nome + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", ciclagem='" + ciclagem + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", setor=" + setor +
-                ", status=" + status +
-                '}';
+        return "-----------------------------\n" +
+                "ID: " + id + "\n" +
+                "Código Patrimonial: " + codigoPatrimonial + "\n" +
+                "Nome: " + nome + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Ciclagem: " + ciclagem + "\n" +
+                "Modelo: " + modelo + "\n" +
+                "Setor: " + setor + "\n" +
+                "Status: " + status + "\n" +
+                "-----------------------------";
     }
 }

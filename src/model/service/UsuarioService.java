@@ -16,12 +16,13 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario cadastrarUsuario(Usuario usuario){
+    public void cadastrarUsuario(Usuario usuario){
 
         if(usuarioRepository.buscarPorLogin(usuario.getLogin()) != null){
             throw new AppException("ERRO: Login já está em uso.");
         }
-        return usuarioRepository.criarUsuario(usuario);
+
+        usuarioRepository.criarUsuario(usuario);
     }
 
     public Collection<Usuario> listarUsuarios(){
@@ -34,18 +35,18 @@ public class UsuarioService {
         return usuarios;
     }
 
-    public Usuario atualizarUsuario(Integer id, Usuario novoUsuario){
-        Usuario usuario = usuarioRepository.buscarPorId(id);
+    public void atualizarUsuario(Usuario novoUsuario){
+        Usuario usuario = usuarioRepository.buscarPorId(novoUsuario.getId());
 
         if(usuario == null){
-            throw  new AppException("ERRO: Usuário não encontrado.");
+            throw new AppException("ERRO: Usuário não encontrado.");
         }
 
         if(!usuario.getLogin().equals(novoUsuario.getLogin()) && usuarioRepository.buscarPorLogin(novoUsuario.getLogin()) != null){
             throw new AppException("ERRO: Login já está em uso.");
         }
 
-        return usuarioRepository.atualizarUsuario(id ,novoUsuario);
+        usuarioRepository.atualizarUsuario(novoUsuario.getId(), novoUsuario);
     }
 
     public void inativarUsuario(Integer id){
