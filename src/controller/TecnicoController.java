@@ -14,11 +14,13 @@ public class TecnicoController {
         this.tecnicoService = tecnicoService;
     }
 
-    public void cadastrarTecnico(Tecnico tecnico){
+    public boolean cadastrarTecnico(Tecnico tecnico){
         try{
             tecnicoService.cadastrarTecnico(tecnico);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -40,19 +42,23 @@ public class TecnicoController {
         }
     }
 
-    public void editarTecnico(Tecnico tecnico){
+    public boolean editarTecnico(Tecnico tecnico){
         try{
             tecnicoService.editarTecnico(tecnico);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public void inativarTecnico(Integer id){
+    public boolean inativarTecnico(Integer id){
         try{
             tecnicoService.inativarTecnico(id);
+            return true;
         }catch(AppException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 }
