@@ -20,13 +20,16 @@ public class GerenciarUsuarios {
         int opcao = 1;
 
         while(opcao != 0){
-            System.out.println("1 - Cadastrar Usuario");
-            System.out.println("2 - Listar Usuario");
-            System.out.println("3 - Atualizar Usuario");
-            System.out.println("4 - Inativar Usuario");
-            System.out.println("5 - Buscar Usuario");
-            System.out.println("0 - Sair");
-            System.out.print("Opção: ");
+            ConsoleUtils.telaPadrao();
+            exibirMenu();
+            System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
+
+            while(!input.hasNextInt()){
+                mensagemErro("Digite um número válido.");
+                input.next();
+                System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
+            }
+
             opcao = input.nextInt();
             input.nextLine();
 
@@ -35,8 +38,9 @@ public class GerenciarUsuarios {
                     Usuario usuario = lerDadosUsuario();
                     boolean sucesso = usuarioController.cadastrarUsuario(usuario);
                     if (sucesso) {
-                        System.out.println("Usuário cadastrado com sucesso!");
+                        mensagemSucesso("Usuário cadastrado com sucesso!");
                     }
+                    aguardarEnter();
                 }
 
                 case 2 -> {
@@ -44,6 +48,7 @@ public class GerenciarUsuarios {
                     if (usuarios != null) {
                         usuarios.forEach(System.out::println);
                     }
+                    aguardarEnter();
                 }
 
                 case 3 -> {
@@ -52,40 +57,68 @@ public class GerenciarUsuarios {
                     novoUsuario.setId(id);
                     boolean sucesso = usuarioController.atualizarUsuario(novoUsuario);
                     if (sucesso) {
-                        System.out.println("Usuário atualizado com sucesso!");
+                        mensagemSucesso("Usuário atualizado com sucesso!");
                     }
+                    aguardarEnter();
                 }
 
                 case 4 -> {
                     Integer idInativarUsuario = lerId();
                     boolean sucesso = usuarioController.inativarUsuario(idInativarUsuario);
                     if (sucesso) {
-                        System.out.println("Usuário inativado com sucesso!");
+                        mensagemSucesso("Usuário inativado com sucesso!");
                     }
+                    aguardarEnter();
                 }
 
                 case 5 -> {
                     Integer idBuscar = lerId();
                     Usuario usuarioBusca = usuarioController.buscarUsuario(idBuscar);
                     if (usuarioBusca != null) {
-                        System.out.println("Usuário Encontrado!");
+                        mensagemSucesso("Usuário encontrado!");
                         System.out.println(usuarioBusca);
                     }
+                    aguardarEnter();
                 }
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção invalida");
+
+                case 0 -> mensagemSucesso("Saindo...");
+
+                default -> {
+                    mensagemErro("Opção inválida.");
+                    aguardarEnter();
+                }
             }
         }
     }
 
+    private void exibirMenu(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "       GERENCIAR USUÁRIOS         " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Cadastrar Usuário             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Listar Usuários               " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Atualizar Usuário             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Inativar Usuário              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "5 - Buscar Usuário                " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Voltar                        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
+    }
+
     public Usuario lerDadosUsuario(){
-        System.out.println("Nome: ");
+        System.out.print("Nome: ");
         String nome = input.nextLine();
 
-        System.out.println("Login: ");
+        System.out.print("Login: ");
         String login = input.nextLine();
 
-        System.out.println("Senha: ");
+        System.out.print("Senha: ");
         String senha = input.nextLine();
 
         PerfilAcesso perfil = lerPerfil();
@@ -95,7 +128,7 @@ public class GerenciarUsuarios {
 
     public PerfilAcesso lerPerfil(){
         while(true){
-            System.out.println("Perfil de acesso:");
+            System.out.println("\nPerfil de acesso:");
             System.out.println("1 - ADMINISTRADOR");
             System.out.println("2 - SUPERVISOR");
             System.out.println("3 - TECNICO");
@@ -108,20 +141,33 @@ public class GerenciarUsuarios {
                 case "2": return PerfilAcesso.SUPERVISOR;
                 case "3": return PerfilAcesso.TECNICO;
                 case "4": return PerfilAcesso.OPERADOR;
-                default: System.out.println("Opção inválida, tente novamente.");
+                default: mensagemErro("Opção inválida, tente novamente.");
             }
         }
     }
 
     public Integer lerId(){
-        System.out.println("Digite o ID: ");
+        System.out.print("Digite o ID: ");
         while(!input.hasNextInt()){
-            System.out.println("Digite um número válido.");
+            mensagemErro("Digite um número válido.");
             input.next();
         }
         Integer id = input.nextInt();
         input.nextLine();
 
         return id;
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        input.nextLine();
     }
 }

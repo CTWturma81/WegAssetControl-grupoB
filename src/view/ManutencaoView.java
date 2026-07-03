@@ -27,27 +27,65 @@ public class ManutencaoView {
         int opcao = 1;
 
         while(opcao != 0){
-            System.out.println("1 - Abrir manutenção");
-            System.out.println("2 - Atribuir manutenção a um técnico");
-            System.out.println("3 - Registrar observação");
-            System.out.println("4 - Finalizar manutenção");
-            System.out.println("5 - Listar manutenções abertas");
-            System.out.println("6 - Listar manutenções por técnico");
-            System.out.println("0 - Sair");
-            System.out.print("Opção: ");
+            ConsoleUtils.telaPadrao();
+            exibirMenu();
+            System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
+
             opcao = lerOpcao();
 
             switch (opcao){
-                case 1 -> abrir();
-                case 2 -> atribuirManutencao();
-                case 3 -> registrar();
-                case 4 -> finalizar();
-                case 5 -> listarAbertas();
-                case 6 -> listarPorTecnico();
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção inválida");
+                case 1 -> {
+                    abrir();
+                    aguardarEnter();
+                }
+                case 2 -> {
+                    atribuirManutencao();
+                    aguardarEnter();
+                }
+                case 3 -> {
+                    registrar();
+                    aguardarEnter();
+                }
+                case 4 -> {
+                    finalizar();
+                    aguardarEnter();
+                }
+                case 5 -> {
+                    listarAbertas();
+                    aguardarEnter();
+                }
+                case 6 -> {
+                    listarPorTecnico();
+                    aguardarEnter();
+                }
+                case 0 -> mensagemSucesso("Saindo...");
+                default -> {
+                    mensagemErro("Opção inválida.");
+                    aguardarEnter();
+                }
             }
         }
+    }
+
+    private void exibirMenu(){
+        String azul = ConsoleUtils.AZUL_BRILHANTE;
+        String branco = ConsoleUtils.BRANCO;
+        String reset = ConsoleUtils.RESET;
+        String negrito = ConsoleUtils.NEGRITO;
+
+        System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "     GERENCIAR MANUTENÇÕES        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Abrir Manutenção              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Atribuir Técnico              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Registrar Observação          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Finalizar Manutenção          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "5 - Listar Abertas                " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "6 - Listar por Técnico            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Voltar                        " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
+        System.out.println();
     }
 
     public void abrir() {
@@ -65,7 +103,7 @@ public class ManutencaoView {
         boolean sucesso = manutencaoController.abrirManutencao(manutencao);
 
         if (sucesso) {
-            System.out.println("Manutenção aberta com sucesso!");
+            mensagemSucesso("Manutenção aberta com sucesso!");
         }
     }
 
@@ -77,19 +115,19 @@ public class ManutencaoView {
 
         boolean sucesso = manutencaoController.atribuirTecnicoManutencao(idManutencao, tecnico);
         if (sucesso) {
-            System.out.println("Técnico atribuído com sucesso!");
+            mensagemSucesso("Técnico atribuído com sucesso!");
         }
     }
 
     public void registrar(){
         Integer idManutencao = lerId("manutenção");
 
-        System.out.println("Insira a observação técnica: ");
+        System.out.print("Insira a observação técnica: ");
         String observacao = input.nextLine();
 
         boolean sucesso = manutencaoController.registrarObservacao(idManutencao, observacao);
         if (sucesso) {
-            System.out.println("Observação registrada com sucesso!");
+            mensagemSucesso("Observação registrada com sucesso!");
         }
     }
 
@@ -98,7 +136,7 @@ public class ManutencaoView {
 
         boolean sucesso = manutencaoController.finalizarManutencao(idManutencao);
         if (sucesso) {
-            System.out.println("Manutenção finalizada com sucesso!");
+            mensagemSucesso("Manutenção finalizada com sucesso!");
         }
     }
 
@@ -119,9 +157,9 @@ public class ManutencaoView {
     }
 
     private Integer lerId(String entidade){
-        System.out.println("Digite o ID do " + entidade + ": ");
+        System.out.print("Digite o ID do " + entidade + ": ");
         while(!input.hasNextInt()){
-            System.out.println("Digite um número válido.");
+            mensagemErro("Digite um número válido.");
             input.next();
         }
         Integer id = input.nextInt();
@@ -134,9 +172,22 @@ public class ManutencaoView {
             try {
                 return Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e){
-                System.out.println("Opção inválida. Digite um número.");
-                System.out.print("Opção: ");
+                mensagemErro("Opção inválida. Digite um número.");
+                System.out.print(ConsoleUtils.BRANCO + "  Opção: " + ConsoleUtils.RESET);
             }
         }
+    }
+
+    private void mensagemSucesso(String texto){
+        System.out.println("\u001B[92m  ✔ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void mensagemErro(String texto){
+        System.out.println("\u001B[91m  ✘ " + texto + ConsoleUtils.RESET);
+    }
+
+    private void aguardarEnter(){
+        System.out.print(ConsoleUtils.BRANCO + "\n  Pressione ENTER para continuar..." + ConsoleUtils.RESET);
+        input.nextLine();
     }
 }

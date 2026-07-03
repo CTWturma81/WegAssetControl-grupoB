@@ -38,7 +38,7 @@ public class MenuAdministrador {
                 case 4 -> sensorView.menuSensor();
                 case 5 -> alertaView.menuAlerta();
                 case 6 -> gerenciarTecnicos.subMenuTecnico();
-                case 7 -> avisoEmDesenvolvimento("Gerenciar Manutenções");
+                case 7 -> manutencaoView.menuManutencao();
                 case 8 -> avisoEmDesenvolvimento("Relatórios");
                 case 9 -> {
                     mensagemSucesso("Saindo...");
