@@ -12,14 +12,15 @@ public class MenuSupervisor {
     private SensorView sensorView;
     private GerenciarTecnicos gerenciarTecnicos;
     private ManutencaoView manutencaoView;
+    private AlertaView alertaView;
 
-    public MenuSupervisor(Scanner scanner, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos, ManutencaoView manutencaoView) {
+    public MenuSupervisor(Scanner scanner, GerenciarSetores gerenciarSetores, AtivoView ativoView, SensorView sensorView, GerenciarTecnicos gerenciarTecnicos, AlertaView alertaView) {
         this.gerenciarSetores = gerenciarSetores;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
         this.gerenciarTecnicos = gerenciarTecnicos;
         this.scanner = scanner;
-        this.manutencaoView = manutencaoView;
+        this.alertaView = alertaView;
     }
 
     public boolean menuSupervisor() {
@@ -33,7 +34,7 @@ public class MenuSupervisor {
                 case 1 -> gerenciarSetores.menuSetor();
                 case 2 -> ativoView.menuAtivo();
                 case 3 -> sensorView.menuSensor();
-                case 4 -> avisoEmDesenvolvimento("Gerenciar Alertas");
+                case 4 -> alertaView.menuAlerta();
                 case 5 -> gerenciarTecnicos.subMenuTecnico();
                 case 6 -> avisoEmDesenvolvimento("Gerenciar Manutenções");
                 case 7 -> avisoEmDesenvolvimento("Relatórios");

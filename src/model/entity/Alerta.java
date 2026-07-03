@@ -122,8 +122,8 @@ public class Alerta {
     public String toString() {
         return "-----------------------------\n" +
                 "ID: " + id + "\n" +
-                "Ativo Industrial: " + ativoIndustrial + "\n" +
-                "Sensor: " + sensor + "\n" +
+                "Ativo Industrial: " + ativoIndustrial.getNome() + "\n" +
+                "Sensor: " + sensor.getCodigo() + "\n" +
                 "Descrição: " + descricao + "\n" +
                 "Nível de Alerta: " + nivelAlerta + "\n" +
                 "Status de Alerta: " + statusAlerta + "\n" +

@@ -10,12 +10,13 @@ public class MenuTecnico {
     private AtivoView ativoView;
     private SensorView sensorView;
     private ManutencaoView manutencaoView;
+    private AlertaView alertaView;
 
-    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView, ManutencaoView manutencaoView) {
+    public MenuTecnico(Scanner scanner, AtivoView ativoView, SensorView sensorView, AlertaView alertaView) {
         this.scanner = scanner;
         this.ativoView = ativoView;
         this.sensorView = sensorView;
-        this.manutencaoView = manutencaoView;
+        this.alertaView = alertaView;
     }
 
     public boolean menuTecnico(){
