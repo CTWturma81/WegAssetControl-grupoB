@@ -50,14 +50,14 @@ public class MenuOperador {
         String negrito = ConsoleUtils.NEGRITO;
 
         System.out.println(azul + negrito + "  ╔═══════════════════════════════════╗" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "           MENU OPERADOR          " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "           MENU OPERADOR            " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "1 - Consultar Ativos             " + azul + "║" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "2 - Consultar Setores            " + azul + "║" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "3 - Consultar Alertas            " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "1 - Consultar Ativos               " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "2 - Consultar Setores              " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "3 - Consultar Alertas              " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "4 - Logout                       " + azul + "║" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema             " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "4 - Logout                         " + azul + "║" + reset);
+        System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema               " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ╚═══════════════════════════════════╝" + reset);
         System.out.println();
     }

@@ -113,8 +113,8 @@ public class Manutencao {
     public String toString(){
         return "-----------------------------\n" +
                 "ID: " + id + "\n" +
-                "Ativo Industrial: " + ativoIndustrial + "\n" +
-                "Técnico: " + tecnico + "\n" +
+                "Ativo Industrial: " + ativoIndustrial.getNome() + "\n" +
+                "Técnico: " + tecnico.getNome() + "\n" +
                 "Descrição do Problema: " + descricaoProblema + "\n" +
                 "Observação Técnica: " + observacaoTecnica + "\n" +
                 "Status: " + status + "\n" +

@@ -39,7 +39,6 @@ public class MenuAdministrador {
                 case 5 -> alertaView.menuAlerta();
                 case 6 -> gerenciarTecnicos.subMenuTecnico();
                 case 7 -> manutencaoView.menuManutencao();
-                case 8 -> avisoEmDesenvolvimento("Relatórios");
                 case 9 -> {
                     mensagemSucesso("Saindo...");
                     aguardarEnter();
@@ -72,7 +71,6 @@ public class MenuAdministrador {
         System.out.println(azul + negrito + "  ║ " + branco + "5 - Gerenciar Alertas             " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "6 - Gerenciar Tecnicos            " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "7 - Gerenciar Manutencoes         " + azul + "║" + reset);
-        System.out.println(azul + negrito + "  ║ " + branco + "8 - Relatorios                    " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ╠═══════════════════════════════════╣" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "9 - Logout                        " + azul + "║" + reset);
         System.out.println(azul + negrito + "  ║ " + branco + "0 - Encerrar Sistema              " + azul + "║" + reset);
